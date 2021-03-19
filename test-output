@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Cucumber</title>
+	<meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+	<style>
+.cucumber-react .cucumber-status--passed {
+  color: #2CB14A;
+}
+.cucumber-react .cucumber-status--skipped {
+  color: #00A0CC;
+}
+.cucumber-react .cucumber-status--pending {
+  color: #FFAD33;
+}
+.cucumber-react .cucumber-status--undefined {
+  color: #FFAD33;
+}
+.cucumber-react .cucumber-status--ambiguous {
+  color: #F4EBFD;
+}
+.cucumber-react .cucumber-status--failed {
+  color: #BB0000;
+}
+.cucumber-react .cucumber-status--unknown {
+  color: #B6BECB;
+}
+.cucumber-react h1, .cucumber-react h2, .cucumber-react h3 {
+  padding: 0;
+  margin: 0;
+}
+.cucumber-react a {
+  color: inherit;
+}
+.cucumber-react .gherkin-document-list {
+  font: 14px "Open Sans", sans-serif;
+  color: #161C24;
+  background: #fff;
+  overflow-x: hidden;
+}
+.cucumber-react .cucumber-title {
+  margin-top: 0.3em;
+  margin-bottom: 0;
+  display: inline-block;
+}
+.cucumber-react .cucumber-title__keyword {
+  font-weight: bold;
+}
+.cucumber-react .cucumber-title__text {
+  font-weight: normal;
+}
+.cucumber-react .cucumber-tags {
+  padding: 0;
+  margin-bottom: 0;
+}
+.cucumber-react .cucumber-tags .cucumber-tag {
+  display: inline;
+  list-style-type: none;
+  padding: 4px 8px 4px 8px;
+  margin-right: 6px;
+  background-color: #FFFFFF;
+  border-radius: 6px;
+}
+.cucumber-react .cucumber-feature__icon {
+  padding-top: 0.35em;
+  padding-right: 0.5em;
+}
+.cucumber-react .cucumber-description,
+.cucumber-react .cucumber-children {
+  margin-left: 1em;
+}
+.cucumber-react .cucumber-feature,
+.cucumber-react .cucumber-rule,
+.cucumber-react .cucumber-scenario,
+.cucumber-react .cucumber-background {
+  margin-bottom: 1em;
+}
+.cucumber-react .cucumber-steps {
+  list-style-type: none;
+  padding-left: 10px;
+}
+.cucumber-react .cucumber-steps .cucumber-step {
+  display: flex;
+}
+.cucumber-react .cucumber-steps .cucumber-step__status {
+  padding-top: 0.2em;
+  padding-right: 0.5em;
+}
+.cucumber-react .cucumber-steps .cucumber-step__content {
+  flex-grow: 1;
+}
+.cucumber-react .cucumber-steps .cucumber-step__keyword {
+  font-weight: bold;
+}
+.cucumber-react .cucumber-steps .cucumber-step__text {
+  font-weight: normal;
+}
+.cucumber-react .cucumber-steps .cucumber-step__param {
+  font-weight: normal;
+  font-style: italic;
+}
+.cucumber-react .cucumber-table {
+  border-collapse: collapse;
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+.cucumber-react .cucumber-table__header-cell {
+  border: 1px solid #4B5662;
+  padding: 0.3em;
+}
+.cucumber-react .cucumber-table__cell {
+  border: 1px solid #4B5662;
+  padding: 0.3em;
+}
+.cucumber-react .cucumber-table__cell__status {
+  padding: 0.5em 3px 3px 3px;
+}
+.cucumber-react .cucumber-table__cell__step {
+  flex-grow: 1;
+}
+.cucumber-react .cucumber-code {
+  padding: 0.25em;
+  background-color: #ebebeb;
+}
+.cucumber-react .cucumber-error {
+  padding: 0.5em;
+  margin: 0;
+  overflow: scroll;
+}
+.cucumber-react .cucumber-no-documents {
+  font: 14px "Open Sans", sans-serif;
+}
+.cucumber-react .cucumber-attachment {
+  background-color: #ebebeb;
+  padding: 0.5em;
+}
+.cucumber-react .cucumber-attachment__icon {
+  margin-right: 0.5em;
+}
+.cucumber-react .cucumber-attachment__image {
+  margin-top: 1em;
+}
+.cucumber-react .cucumber-anchor {
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin-top: 0.3em;
+}
+.cucumber-react .cucumber-anchor__link {
+  opacity: 0;
+  transition: all 0.35s ease-in-out;
+  position: absolute;
+  left: -20px;
+  display: flex;
+  align-items: center;
+}
+.cucumber-react .cucumber-anchor__icon {
+  margin-right: 0.5em;
+}
+.cucumber-react .cucumber-anchor:hover a {
+  opacity: 1;
+  width: max-content;
+  transition: all 0.35s ease-in-out;
+}
+.cucumber-react .cucumber-anchor > * {
+  height: 100%;
+  margin-top: 0px;
+}
+
+.cucumber-report-header {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  font: 11px "Open Sans", sans-serif;
+  margin-bottom: 1em;
+}
+.cucumber-report-header > * {
+  padding: 1em;
+}
+.cucumber-report-header .cucumber-status-filter {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+.cucumber-report-header .cucumber-status-filter table {
+  width: 100%;
+}
+.cucumber-report-header .cucumber-execution-data {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+.cucumber-report-header .cucumber-search-bar {
+  border-right: 0;
+}
+.cucumber-report-header .cucumber-search-bar form.cucumber-search-bar-search {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 9fr 1fr;
+}
+.cucumber-report-header .cucumber-search-bar form.cucumber-search-bar-search input {
+  padding: 0.4em;
+  border-radius: 0;
+}
+.cucumber-report-header .cucumber-search-bar form.cucumber-search-bar-search button {
+  height: 2.2em;
+  padding-left: 0.6em;
+  padding-right: 0.6em;
+}
+.cucumber-report-header .cucumber-search-bar p.help {
+  font-size: 80%;
+}
+.cucumber-report-header .cucumber-search-bar form.cucumber-search-bar-filter ul {
+  display: inline;
+}
+.cucumber-report-header .cucumber-search-bar form.cucumber-search-bar-filter ul li {
+  list-style-type: none;
+  display: inline-block;
+}
+.cucumber-report-header .cucumber-search-bar form.cucumber-search-bar-filter ul li input {
+  display: inline-block;
+  width: auto;
+  height: 0.6em;
+}
+.cucumber-report-header .cucumber-search-bar form.cucumber-search-bar-filter ul li label {
+  padding-right: 1em;
+}
+
+@media only screen and (min-width: 600px) {
+  .cucumber-report-header {
+    grid-template-columns: 1fr 1fr;
+  }
+  .cucumber-report-header .cucumber-status-filter {
+    border-right: 1px solid rgba(0, 0, 0, 0.1);
+  }
+  .cucumber-report-header .cucumber-search-bar {
+    grid-column: 1/-1;
+  }
+}
+@media only screen and (min-width: 992px) {
+  .cucumber-report-header {
+    grid-template-columns: 1fr 1fr 2fr;
+  }
+  .cucumber-report-header .cucumber-status-filter {
+    border-bottom: 0;
+  }
+  .cucumber-report-header .cucumber-execution-data {
+    border-right: 1px solid rgba(0, 0, 0, 0.1);
+    border-bottom: 0;
+  }
+  .cucumber-report-header .cucumber-search-bar {
+    grid-column: auto;
+  }
+}
+.accordion {
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 2px;
+}
+
+.accordion__item + .accordion__item {
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.accordion__button {
+    background-color: #f4f4f4;
+    color: #444;
+    cursor: pointer;
+    padding: 10px;
+    width: 100%;
+    text-align: left;
+    border: none;
+}
+
+.accordion__button:hover {
+    background-color: #ddd;
+}
+
+.accordion__button:before {
+    display: inline-block;
+    content: '';
+    height: 10px;
+    width: 10px;
+    margin-right: 12px;
+    border-bottom: 2px solid currentColor;
+    border-right: 2px solid currentColor;
+    transform: rotate(-45deg);
+}
+
+.accordion__button[aria-expanded='true']::before,
+.accordion__button[aria-selected='true']::before {
+    transform: rotate(45deg);
+}
+
+.accordion__panel {
+    padding: 20px;
+    animation: fadein 0.35s ease-in;
+}
+
+	</style>
+</head>
+<body>
+<div id="content">
+</div>
+<script>
+window.CUCUMBER_MESSAGES = [{"meta":{"protocolVersion":"13.2.1","implementation":{"name":"cucumber-jvm","version":"6.9.1"},"runtime":{"name":"Java HotSpot(TM) 64-Bit Server VM","version":"25.281-b09"},"os":{"name":"Windows 10"},"cpu":{"name":"amd64"}}},{"testRunStarted":{"timestamp":{"seconds":"1616066377","nanos":191000000}}},{"source":{"uri":"file:///C:/Users/astojanovic.ITHQ/Desktop/REPO/UWREFF/PURE_CORE6/src/test/java/feature_files/underwriting/utilities/QuoteCreation.feature","data":"# As an internal user i would like to be able to create quotes\r\n\r\nFeature: Quote Creation\r\n\r\n  #------------------------------ Scenario : Quote Creation ------------------------------#\r\n\r\n  @Underwriting\r\n  @QuoteCreation\r\n\r\n  Scenario Outline: Quote Creation\r\n\r\n    Given I am logged in to Pure as \"\u003csubrole\u003e\"\r\n    When I navigate to Quotes\r\n    And I initiate a new quote for a new customer with location in \"\u003cstate\u003e\" \"\u003cprimaryAddress\u003e\" \"\u003ccity\u003e\" \"\u003czip\u003e\"\r\n    And I create a quote\r\n    And I accept underwriting referrals\r\n    And I create required forms\r\n    Examples:\r\n      | subrole | state | primaryAddress                    | city            | zip |\r\n      | Field   | FL    | 12th Street, Miami Beach, FL, USA | Miami Beach     |33139|","mediaType":"text/x.cucumber.gherkin+plain"}},{"gherkinDocument":{"uri":"file:///C:/Users/astojanovic.ITHQ/Desktop/REPO/UWREFF/PURE_CORE6/src/test/java/feature_files/underwriting/utilities/QuoteCreation.feature","feature":{"location":{"line":3,"column":1},"language":"en","keyword":"Feature","name":"Quote Creation","children":[{"scenario":{"location":{"line":10,"column":3},"tags":[{"location":{"line":7,"column":3},"name":"@Underwriting","id":"13b0d11f-456e-4381-a2ab-193c65b11de5"},{"location":{"line":8,"column":3},"name":"@QuoteCreation","id":"f4fe2099-a724-455e-abc8-3e46abd591cc"}],"keyword":"Scenario Outline","name":"Quote Creation","steps":[{"location":{"line":12,"column":5},"keyword":"Given ","text":"I am logged in to Pure as \"\u003csubrole\u003e\"","id":"e234c0ed-2c97-4330-9bb3-ca7b07aece4b"},{"location":{"line":13,"column":5},"keyword":"When ","text":"I navigate to Quotes","id":"a3654f82-5e62-48ec-8bd0-2a3488549610"},{"location":{"line":14,"column":5},"keyword":"And ","text":"I initiate a new quote for a new customer with location in \"\u003cstate\u003e\" \"\u003cprimaryAddress\u003e\" \"\u003ccity\u003e\" \"\u003czip\u003e\"","id":"732aa436-2860-4106-a35d-1c24cf0caf2d"},{"location":{"line":15,"column":5},"keyword":"And ","text":"I create a quote","id":"a4a366c7-75d6-4a54-b736-53a3b3e4eddb"},{"location":{"line":16,"column":5},"keyword":"And ","text":"I accept underwriting referrals","id":"22ee12ad-935c-4532-8b1a-abdd651b5300"},{"location":{"line":17,"column":5},"keyword":"And ","text":"I create required forms","id":"d97dd10d-a129-4f18-8ab3-9b75ae379f43"}],"examples":[{"location":{"line":18,"column":5},"keyword":"Examples","tableHeader":{"location":{"line":19,"column":7},"cells":[{"location":{"line":19,"column":9},"value":"subrole"},{"location":{"line":19,"column":19},"value":"state"},{"location":{"line":19,"column":27},"value":"primaryAddress"},{"location":{"line":19,"column":63},"value":"city"},{"location":{"line":19,"column":81},"value":"zip"}],"id":"080464ab-a1b7-452b-bbc3-22fd31245e28"},"tableBody":[{"location":{"line":20,"column":7},"cells":[{"location":{"line":20,"column":9},"value":"Field"},{"location":{"line":20,"column":19},"value":"FL"},{"location":{"line":20,"column":27},"value":"12th Street, Miami Beach, FL, USA"},{"location":{"line":20,"column":63},"value":"Miami Beach"},{"location":{"line":20,"column":80},"value":"33139"}],"id":"0439b759-515c-48df-acf4-62366262ff74"}],"id":"d6a91d12-13df-4848-9c66-0ff34d5ef8b9"}],"id":"ba031be4-e93d-44fb-8923-4f429c59f378"}}]},"comments":[{"location":{"line":1,"column":1},"text":"# As an internal user i would like to be able to create quotes"},{"location":{"line":5,"column":1},"text":"  #------------------------------ Scenario : Quote Creation ------------------------------#"}]}},{"pickle":{"id":"c98323bf-f561-44b2-b714-d4858351bf9f","uri":"file:///C:/Users/astojanovic.ITHQ/Desktop/REPO/UWREFF/PURE_CORE6/src/test/java/feature_files/underwriting/utilities/QuoteCreation.feature","name":"Quote Creation","language":"en","steps":[{"text":"I am logged in to Pure as \"Field\"","id":"4b4f442d-b231-4d60-b023-3965d68f5162","astNodeIds":["e234c0ed-2c97-4330-9bb3-ca7b07aece4b","0439b759-515c-48df-acf4-62366262ff74"]},{"text":"I navigate to Quotes","id":"5a85cc56-db3d-4ed1-860a-88c571b6e6b2","astNodeIds":["a3654f82-5e62-48ec-8bd0-2a3488549610","0439b759-515c-48df-acf4-62366262ff74"]},{"text":"I initiate a new quote for a new customer with location in \"FL\" \"12th Street, Miami Beach, FL, USA\" \"Miami Beach\" \"33139\"","id":"e27374bd-8b40-4b79-b02f-9616f89473a5","astNodeIds":["732aa436-2860-4106-a35d-1c24cf0caf2d","0439b759-515c-48df-acf4-62366262ff74"]},{"text":"I create a quote","id":"4abb5284-9097-43c4-ace2-7f7c6d51e715","astNodeIds":["a4a366c7-75d6-4a54-b736-53a3b3e4eddb","0439b759-515c-48df-acf4-62366262ff74"]},{"text":"I accept underwriting referrals","id":"0aeec8d0-111f-4b0e-a207-d01f7572a492","astNodeIds":["22ee12ad-935c-4532-8b1a-abdd651b5300","0439b759-515c-48df-acf4-62366262ff74"]},{"text":"I create required forms","id":"5216250e-87f7-474f-bf8a-59ca2acfc68b","astNodeIds":["d97dd10d-a129-4f18-8ab3-9b75ae379f43","0439b759-515c-48df-acf4-62366262ff74"]}],"tags":[{"name":"@Underwriting","astNodeId":"13b0d11f-456e-4381-a2ab-193c65b11de5"},{"name":"@QuoteCreation","astNodeId":"f4fe2099-a724-455e-abc8-3e46abd591cc"}],"astNodeIds":["ba031be4-e93d-44fb-8923-4f429c59f378","0439b759-515c-48df-acf4-62366262ff74"]}},{"testCase":{"id":"c0899bfe-83b8-4ffc-9ca9-6444eea66226","pickleId":"c98323bf-f561-44b2-b714-d4858351bf9f","testSteps":[{"id":"c3d0279f-7c6b-46e4-b5ea-9b48fdb6374a","hookId":"f9e42bb1-0237-4364-9485-5084e908fec2"},{"id":"6f4de220-6033-4965-bf6b-99fec2dd7056","pickleStepId":"4b4f442d-b231-4d60-b023-3965d68f5162","stepDefinitionIds":["1c7b2f5c-c34c-4cce-b8b8-38eb05ee742e"],"stepMatchArgumentsLists":[{"stepMatchArguments":[{"parameterTypeName":"string","group":{"start":26,"value":"\"Field\"","children":[{"start":27,"value":"Field","children":[{}]},{"children":[{}]}]}}]}]},{"id":"8df1223c-46a3-49e0-a8ee-20475f0da59e","pickleStepId":"5a85cc56-db3d-4ed1-860a-88c571b6e6b2","stepDefinitionIds":["c4134d7b-2795-4ea5-b931-56428189d621"],"stepMatchArgumentsLists":[{}]},{"id":"cd8a5084-e83d-4a83-adc8-978940a1819c","pickleStepId":"e27374bd-8b40-4b79-b02f-9616f89473a5","stepDefinitionIds":["3ae49fb5-9fa8-44c1-9a0a-45d3d2143411"],"stepMatchArgumentsLists":[{"stepMatchArguments":[{"parameterTypeName":"string","group":{"start":59,"value":"\"FL\"","children":[{"start":60,"value":"FL","children":[{}]},{"children":[{}]}]}},{"parameterTypeName":"string","group":{"start":64,"value":"\"12th Street, Miami Beach, FL, USA\"","children":[{"start":65,"value":"12th Street, Miami Beach, FL, USA","children":[{}]},{"children":[{}]}]}},{"parameterTypeName":"string","group":{"start":100,"value":"\"Miami Beach\"","children":[{"start":101,"value":"Miami Beach","children":[{}]},{"children":[{}]}]}},{"parameterTypeName":"string","group":{"start":114,"value":"\"33139\"","children":[{"start":115,"value":"33139","children":[{}]},{"children":[{}]}]}}]}]},{"id":"1f0992ed-abbc-4e66-bb9d-6b27d9bed426","pickleStepId":"4abb5284-9097-43c4-ace2-7f7c6d51e715","stepDefinitionIds":["683d8d3b-983a-4fad-92ec-26b51a54be3d"],"stepMatchArgumentsLists":[{}]},{"id":"0b1f119c-d873-4b8c-bff3-be95ce3bfd1a","pickleStepId":"0aeec8d0-111f-4b0e-a207-d01f7572a492","stepDefinitionIds":["7946ab66-72b7-4449-b98e-feb6e92ddbfd"],"stepMatchArgumentsLists":[{}]},{"id":"7060e7a1-bd24-41ef-8849-2f7aca10892e","pickleStepId":"5216250e-87f7-474f-bf8a-59ca2acfc68b","stepDefinitionIds":["c3c2d3ef-a8e9-4c87-9d72-26accf492814"],"stepMatchArgumentsLists":[{}]},{"id":"53893430-ce1c-45f4-9bef-596e5a2101a3","hookId":"4566f635-5aa4-4c00-a7d2-d0613ff81a9a"}]}},{"testCaseStarted":{"timestamp":{"seconds":"1616066377","nanos":368000000},"testCaseId":"c0899bfe-83b8-4ffc-9ca9-6444eea66226","id":"adb66876-212c-4315-a7aa-ef9a79e73890"}},{"testStepStarted":{"timestamp":{"seconds":"1616066377","nanos":436000000},"testStepId":"c3d0279f-7c6b-46e4-b5ea-9b48fdb6374a","testCaseStartedId":"adb66876-212c-4315-a7aa-ef9a79e73890"}},{"testStepFinished":{"testStepResult":{"status":"PASSED","duration":{"seconds":"1","nanos":429000000}},"timestamp":{"seconds":"1616066378","nanos":865000000},"testStepId":"c3d0279f-7c6b-46e4-b5ea-9b48fdb6374a","testCaseStartedId":"adb66876-212c-4315-a7aa-ef9a79e73890"}},{"testStepStarted":{"timestamp":{"seconds":"1616066378","nanos":874000000},"testStepId":"6f4de220-6033-4965-bf6b-99fec2dd7056","testCaseStartedId":"adb66876-212c-4315-a7aa-ef9a79e73890"}},{"testStepFinished":{"testStepResult":{"status":"PASSED","duration":{"seconds":"9","nanos":968000000}},"timestamp":{"seconds":"1616066388","nanos":842000000},"testStepId":"6f4de220-6033-4965-bf6b-99fec2dd7056","testCaseStartedId":"adb66876-212c-4315-a7aa-ef9a79e73890"}},{"testStepStarted":{"timestamp":{"seconds":"1616066388","nanos":846000000},"testStepId":"8df1223c-46a3-49e0-a8ee-20475f0da59e","testCaseStartedId":"adb66876-212c-4315-a7aa-ef9a79e73890"}},{"testStepFinished":{"testStepResult":{"statu
