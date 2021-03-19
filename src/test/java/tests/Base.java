@@ -102,4 +102,8 @@ public class Base {
         Calendar cal = Calendar.getInstance();
         return dateFormat.format(cal.getTime());
     }
+
+    public void pause(int seconds) throws InterruptedException {
+        Thread.sleep(seconds*1000);
+    }
 }

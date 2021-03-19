@@ -45,12 +45,6 @@ public class ConstructionDetailsComponent extends CommonComponentsAndActions {
     @FindBy(xpath = "//div[text()='Protection Class Override']/../../../..//input")
     WebElement protectionClassOverride;
 
-
-    // TODO CORE UPGRADE REFACTOR
-    @FindBy(xpath = "//input[contains(@title,'The floor on which the risk is located')]")
-    WebElement floorLocatedRisk;
-    // TODO CORE UPGRADE REFACTOR
-
     public void fillBasicConstructionDetails(Map<String, String> data) throws InterruptedException {
         setYearBuilt(data.get("YearBuilt"));
         Thread.sleep(3000);
@@ -64,68 +58,43 @@ public class ConstructionDetailsComponent extends CommonComponentsAndActions {
         clickElement(CommonComponentsAndActions.saveChanges);
         Thread.sleep(10000);
     }
-
-    public void fillAdditionalConstructionDetails(Map<String, String> data) {
-        setYearBuilt(data.get("YearBuilt"));
-        setBceg(data.get("BCEG"));
-        setSquareFootageUnderAir(data.get("SquareFootage"));
-        setNumberOfFloorsAtRiskLocation(data.get("NumberOfFloors"));
-        setConstructionType(data.get("ConstructionType"));
-    }
-
-    private void setFloorLocatedRisk(String floor) {
-        typeText(floorLocatedRisk, floor);
-    }
-
     public void setYearBuilt(String yearBuilt) {
         typeText(yearBuiltInput, yearBuilt);
         typeKeys(yearBuiltInput, Keys.TAB);
     }
-
     public void setProtectionClass(String protectionClassValue) {
         typeText(protectionClass.get(0), protectionClassValue);
     }
-
     public void setBceg(String bcegValue) {
         typeText(bcegSelect.get(2), bcegValue);
     }
-
     public void setSquareFootageUnderAir(String squareFootageUnderAirValue) {
         typeText(squareFootageUnderAir, squareFootageUnderAirValue);
     }
-
     public void setNumberOfFloorsAtRiskLocation(String numberOfFloorsAtRiskLocationValue) {
         typeText(numberOfFloorsAtRiskLocation, numberOfFloorsAtRiskLocationValue);
     }
-
     public void setConstructionType(String constructionTypeValue) {
         typeText(constructionTypeSelect, constructionTypeValue);
     }
-
     public void managerBCEGOverrideYes() {
         clickElement(managerBCEGOverrideYes);
     }
-
     public void barrierIslandIndicator() {
         clickElement(barrierIslandIndicator);
     }
-
     public void barrierIslandIndicatorOverride() {
         clickElement(barrierIslandIndicatorOverride);
     }
-
     public void managerDTCOverride() {
         clickElement(managerDTCOverride);
     }
-
     public void bcegOverride(String value) {
         typeText(bcegOverride, value);
     }
-
     public void managerPPCOverride() {
         clickElement(managerPPCOverride);
     }
-
     public void protectionClassOverride(String value) {
         typeText(protectionClassOverride, value);
     }

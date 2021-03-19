@@ -15,6 +15,9 @@ Feature: Quote Creation
     And I create a quote
     And I accept underwriting referrals
     And I create required forms
+    And I request Issue
+    And I bind a quote
     Examples:
       | subrole | state | primaryAddress                    | city            | zip |
+      | Field   | FL    | 12th Street, Miami Beach, FL, USA | Miami Beach     |33139|
       | Field   | FL    | 12th Street, Miami Beach, FL, USA | Miami Beach     |33139|

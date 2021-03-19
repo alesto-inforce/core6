@@ -8,6 +8,8 @@ import pages.components.CommonComponentsAndActions;
 import pages.components.MemberApplicationAndAgreementsComponent;
 import pages.components.SignaturePreferenceComponent;
 
+import java.util.Map;
+
 public class RequiredFormsPage extends CommonComponentsAndActions {
     static WebDriver driver;
     SignaturePreferenceComponent signaturePreferenceComponent;
@@ -27,8 +29,8 @@ public class RequiredFormsPage extends CommonComponentsAndActions {
     public void generateDocuments(){
         clickElement(generateDocuments);
     }
-    public void fillSignaturePreferenceAndUpload(String memberEmail, String brokerEmail){
-        signaturePreferenceComponent.fillSignaturePreferenceNoReminder(memberEmail,brokerEmail);
+    public void fillSignaturePreferenceAndUpload(Map<String,String> data){
+        signaturePreferenceComponent.fillSignaturePreferenceNoReminder(data.get("MemberEmail"),data.get("BrokerEmail"));
         memberApplicationAndAgreementsComponent.upload();
     }
 }

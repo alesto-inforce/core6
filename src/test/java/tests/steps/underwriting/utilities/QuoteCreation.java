@@ -10,7 +10,6 @@ import org.testng.Reporter;
 import org.testng.annotations.Listeners;
 import pages.*;
 import pages.components.CommonComponentsAndActions;
-import selenium_core.DriverType;
 import tests.Base;
 import tests.listeners.AllureTestNGListener;
 
@@ -34,7 +33,6 @@ public class QuoteCreation extends Base {
      */
     static final String QuoteCreationData = "src/test/test_data/QuoteCreation.xlsx";
 
-    //Declaring pages used in tests
     LoginPage loginpage;
     HomePage homePage;
     QuotesPage quotesPage;
@@ -42,12 +40,22 @@ public class QuoteCreation extends Base {
     HomeownersPolicyCoverPage homeownersPolicyCoverPage;
     LocationCoveragePage locationCoveragePage;
     OptionalCoveragesPage optionalCoveragesPage;
+    InspectionPage inspectionPage;
     PreviousClaimLossesPage previousClaimLossesPage;
     PremiumSummaryPage premiumSummaryPage;
     UnderwritingReferralsPage underwritingReferralsPage;
     SummaryPage summaryPage;
     RequiredFormsPage requiredFormsPage;
     EditAttachmentPage editAttachmentPage;
+    AdditionalInterestsPage additionalInterestsPage;
+    BindingInformationPage bindingInformationPage;
+    ManuscriptEndorsementsPage manuscriptEndorsementsPage;
+    SubjectivitiesPage subjectivitiesPage;
+    CustomerPreBindFormsPage customerPreBindFormsPage;
+    CustomersRequiredFormsPage customersRequiredFormsPage;
+    CustomerSummaryPage customerSummaryPage;
+    PolicyDeliveryPage policyDeliveryPage;
+    BillingPreferancePage billingPreferancePage;
 
     /**
      * Initializes Chrome driver
@@ -96,15 +104,12 @@ public class QuoteCreation extends Base {
      * @throws IOException /
      */
     @And("I initiate a new quote for a new customer with location in {string} {string} {string} {string}")
-    public void iInitiateANewQuoteForANewCustomerWithLocationIn(String state, String primaryAddress, String city, String zip) throws InterruptedException, IOException {
+    public void iInitiateANewQuoteForANewCustomerWithLocationIn(String state, String primaryAddress, String city, String zip) throws IOException, InterruptedException {
         quotesPage = new QuotesPage(driver);
         quoteBasicInformationPage = new QuoteBasicInformationPage(driver);
-
         Map<String,String> initiateQuoteData = ExcelUtilities.getData(QuoteCreationData,"InitiateQuote");
-
         quotesPage.newQuote();
         quotesPage.searchAndSelectAgencyAdvanced(ENV);
-
         initiateQuoteData.put("ENV",ENV);
         initiateQuoteData.replace("EffectiveDate",getNextWeekDate());
         initiateQuoteData.replace("RiskState",state);
@@ -112,9 +117,7 @@ public class QuoteCreation extends Base {
         initiateQuoteData.replace("PrimaryAddressLine",primaryAddress);
         initiateQuoteData.replace("City",city);
         initiateQuoteData.replace("ZIPCode",zip);
-
         quoteBasicInformationPage.initiateQuote(initiateQuoteData);
-
         quoteBasicInformationPage.clickElement(CommonComponentsAndActions.next);
         quoteBasicInformationPage.clickElement(CommonComponentsAndActions.createNewCustomer);
     }
@@ -127,36 +130,44 @@ public class QuoteCreation extends Base {
      */
     @And("I create a quote")
     public void iCreateAQuote() throws IOException, InterruptedException {
-        homeownersPolicyCoverPage = new HomeownersPolicyCoverPage(driver);
-        locationCoveragePage = new LocationCoveragePage(driver);
-        optionalCoveragesPage = new OptionalCoveragesPage(driver);
-        previousClaimLossesPage = new PreviousClaimLossesPage(driver);
-
-        Map<String,String> policyCoverPageData = ExcelUtilities.getData(QuoteCreationData,"HOPolicyCoverPage");
-        Map<String,String> basicLocationCoverageData = ExcelUtilities.getData(QuoteCreationData,"BasicLocationCoverage");
-
-        homeownersPolicyCoverPage.fillOutHomeownersPolicyCoverPage(policyCoverPageData);
+        homeownersPolicyCoverPage   = new HomeownersPolicyCoverPage(driver);
+        locationCoveragePage        = new LocationCoveragePage(driver);
+        optionalCoveragesPage       = new OptionalCoveragesPage(driver);
+        previousClaimLossesPage     = new PreviousClaimLossesPage(driver);
+        inspectionPage              = new InspectionPage(driver);
+        additionalInterestsPage     = new AdditionalInterestsPage(driver);
+        bindingInformationPage      = new BindingInformationPage(driver);
+        manuscriptEndorsementsPage  = new ManuscriptEndorsementsPage(driver);
+        subjectivitiesPage          = new SubjectivitiesPage(driver);
+        Map<String,String> quoteCreationDetails = ExcelUtilities.getData(QuoteCreationData,"QuoteCreationDetails");
+        homeownersPolicyCoverPage.fillOutHomeownersPolicyCoverPage(quoteCreationDetails);
         homeownersPolicyCoverPage.clickElement(CommonComponentsAndActions.actionButtonNext);
-        locationCoveragePage.fillBasicLocationCoverageDetails(basicLocationCoverageData);
+        locationCoveragePage.fillBasicLocationCoverageDetails(quoteCreationDetails);
         locationCoveragePage.clickElement(CommonComponentsAndActions.actionButtonNext);
-        Thread.sleep(10000);
+        pause(8);
         optionalCoveragesPage.clickElement(CommonComponentsAndActions.actionButtonNext);
         previousClaimLossesPage.noPriorLossesInPastFiveYears();
-
-        previousClaimLossesPage.clickElement(CommonComponentsAndActions.rate);
+        previousClaimLossesPage.clickElement(CommonComponentsAndActions.actionButtonNext);
+        inspectionPage.fillOutInspectionDetails(quoteCreationDetails);
+        inspectionPage.clickElement(CommonComponentsAndActions.actionButtonNext);
+        additionalInterestsPage.clickElement(CommonComponentsAndActions.actionButtonNext);
+        bindingInformationPage.fillOutBindingInformation(quoteCreationDetails);
+        bindingInformationPage.clickElement(CommonComponentsAndActions.actionButtonNext);
+        manuscriptEndorsementsPage.clickElement(CommonComponentsAndActions.actionButtonNext);
+        subjectivitiesPage.clickElement(CommonComponentsAndActions.actionButtonNext);
+        homeownersPolicyCoverPage.clickElement(CommonComponentsAndActions.rate);
     }
 
     @And("I accept underwriting referrals")
     public void iAcceptUnderwritingReferrals() throws InterruptedException {
         premiumSummaryPage = new PremiumSummaryPage(driver);
         underwritingReferralsPage = new UnderwritingReferralsPage(driver);
-
-        Thread.sleep(30000);
+        pause(30);
         premiumSummaryPage.clickElement(CommonComponentsAndActions.underwritingReferrals);
         underwritingReferralsPage.acceptReferrals("Accepted");
         underwritingReferralsPage.clickElement(CommonComponentsAndActions.accept);
         underwritingReferralsPage.acceptReferralsPopUp();
-        Thread.sleep(10000);
+        pause(10);
     }
 
     @And("I create required forms")
@@ -165,23 +176,52 @@ public class QuoteCreation extends Base {
         premiumSummaryPage = new PremiumSummaryPage(driver);
         requiredFormsPage = new RequiredFormsPage(driver);
         editAttachmentPage = new EditAttachmentPage(driver);
-
+        customerPreBindFormsPage = new CustomerPreBindFormsPage(driver);
+        customersRequiredFormsPage = new CustomersRequiredFormsPage(driver);
+        customerSummaryPage = new CustomerSummaryPage(driver);
+        Map<String,String> requiredFormsDetails = ExcelUtilities.getData(QuoteCreationData,"RequiredFormsDetails");
         summaryPage.clickElement(CommonComponentsAndActions.premiumSummary);
         premiumSummaryPage.clickElement(CommonComponentsAndActions.createRequiredForms);
-
-        Thread.sleep(10000);
-        requiredFormsPage.fillSignaturePreferenceAndUpload("member@email.com", "broker@email.com");
-
-        Map<String,String> attachmentDetails = ExcelUtilities.getData(QuoteCreationData,"HOEditAttachmentPage");
-
-        editAttachmentPage.addAttachment(attachmentDetails);
+        pause(10);
+        requiredFormsPage.fillSignaturePreferenceAndUpload(requiredFormsDetails);
+        editAttachmentPage.addAttachment(requiredFormsDetails);
         editAttachmentPage.clickElement(CommonComponentsAndActions.saveChanges);
-
         requiredFormsPage.generateDocuments();
+        customerPreBindFormsPage.clickElement(CommonComponentsAndActions.sendEmailSignature);
+        pause(10);
+        customersRequiredFormsPage.navigateToCustomer();
+        customerSummaryPage.navigateToQuote();
+    }
 
-        requiredFormsPage.clickElement(CommonComponentsAndActions.sendEmailSignature); //todo refactor call from pre-bind forms page (create page and components)
+    @And("I request Issue")
+    public void iRequestIssue() throws InterruptedException {
+        summaryPage = new SummaryPage(driver);
+        premiumSummaryPage = new PremiumSummaryPage(driver);
+        underwritingReferralsPage = new UnderwritingReferralsPage(driver);
+        summaryPage.clickElement(CommonComponentsAndActions.requestIssue);
+        pause(2);
+        premiumSummaryPage.clickElement(CommonComponentsAndActions.underwritingReferrals);
+        underwritingReferralsPage.acceptUnacceptedReferrals("Accepted");
+        underwritingReferralsPage.clickElement(CommonComponentsAndActions.accept);
+        underwritingReferralsPage.acceptReferralsPopUp();
+        pause(10);
+    }
 
-        //TODO application error
-        System.out.println("End");
+    @And("I bind a quote")
+    public void iBindAQuote() throws IOException, InterruptedException {
+        summaryPage = new SummaryPage(driver);
+        policyDeliveryPage = new PolicyDeliveryPage(driver);
+        billingPreferancePage = new BillingPreferancePage(driver);
+        Map<String,String> quoteCreationDetails = ExcelUtilities.getData(QuoteCreationData,"QuoteCreationDetails");
+        summaryPage.clickElement(CommonComponentsAndActions.bind);
+        policyDeliveryPage.fillPolicyDeliveryOptions(quoteCreationDetails);
+        policyDeliveryPage.fillPrintAndDeliveryOptions();
+        policyDeliveryPage.clickElement(CommonComponentsAndActions.next2);
+        billingPreferancePage.sendBillToMember();
+        billingPreferancePage.clickElement(CommonComponentsAndActions.confirm2);
+
+        //verify billing choices page TODO
+        billingPreferancePage.clickElement(CommonComponentsAndActions.requestBind);
+        //TODO...
     }
 }

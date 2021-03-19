@@ -5,6 +5,8 @@ import org.openqa.selenium.support.PageFactory;
 import pages.components.CommonComponentsAndActions;
 import pages.components.InspectionInformationComponent;
 
+import java.util.Map;
+
 public class InspectionPage extends CommonComponentsAndActions {
     static WebDriver driver;
     InspectionInformationComponent inspectionInformationComponent;
@@ -15,8 +17,8 @@ public class InspectionPage extends CommonComponentsAndActions {
         inspectionInformationComponent = new InspectionInformationComponent(driver);
         PageFactory.initElements(driver,this);
     }
-    public void fillOutInspectionDetails(String name, String date){
-        inspectionInformationComponent.fillOutInspectionInformation(name,date);
+    public void fillOutInspectionDetails(Map<String,String> data){
+        inspectionInformationComponent.fillOutInspectionInformation(data.get("InspectionName"),data.get("InspectionDate"));
     }
 
 }

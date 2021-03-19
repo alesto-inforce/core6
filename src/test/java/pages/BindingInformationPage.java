@@ -6,6 +6,8 @@ import pages.components.AdditionalLocationBindingInformationComponent;
 import pages.components.AppraisalInformationComponent;
 import pages.components.CommonComponentsAndActions;
 
+import java.util.Map;
+
 public class BindingInformationPage extends CommonComponentsAndActions {
     static WebDriver driver;
     AdditionalLocationBindingInformationComponent additionalLocationBindingInformationComponent;
@@ -18,9 +20,8 @@ public class BindingInformationPage extends CommonComponentsAndActions {
         appraisalInformationComponent = new AppraisalInformationComponent(driver);
         PageFactory.initElements(driver,this);
     }
-    public void fillOutBindingInformation(){
-        additionalLocationBindingInformationComponent.fillOutAdditionalLocationBindingInformationAllNo();
-        appraisalInformationComponent.fillOutAppraisalInformation("Test Name","1231231231","","");
-        //TODO add to testdata refactor
+    public void fillOutBindingInformation(Map<String,String> data){
+        additionalLocationBindingInformationComponent.fillOutAdditionalLocationBindingInformation(data);
+        appraisalInformationComponent.fillOutAppraisalInformation(data);
     }
 }

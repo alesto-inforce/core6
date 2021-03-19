@@ -5,42 +5,29 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import pages.components.CommonComponentsAndActions;
+import pages.components.PolicyDeliveryOptionsComponent;
+import pages.components.PrintAndMailDeliveryPreferenceComponent;
+
+import java.util.Map;
 
 public class PolicyDeliveryPage extends CommonComponentsAndActions {
     static WebDriver driver;
+    PolicyDeliveryOptionsComponent policyDeliveryOptionsComponent;
+    PrintAndMailDeliveryPreferenceComponent printAndMailDeliveryPreferenceComponent;
 
     public PolicyDeliveryPage(WebDriver driver){
         super(driver);
         PolicyDeliveryPage.driver = driver;
+        policyDeliveryOptionsComponent = new PolicyDeliveryOptionsComponent(driver);
+        printAndMailDeliveryPreferenceComponent = new PrintAndMailDeliveryPreferenceComponent(driver);
         PageFactory.initElements(driver,this);
     }
+    public void  fillPolicyDeliveryOptions(Map<String,String> data){
+        policyDeliveryOptionsComponent.optOutElectronicDelivery(data.get("OptOutOfDelivery"));
+        policyDeliveryOptionsComponent.howToDeliverDocs(data.get("DeliveryOptions"));
+    }
+    public void fillPrintAndDeliveryOptions() throws InterruptedException {
+        printAndMailDeliveryPreferenceComponent.fillPrintAndDeliveryOptions();
+    }
 
-    @FindBy(xpath = "//div[@title='Did the member opt out of electronic delivery (Applicant)?']/../div[2]/ul/li[2]//input")
-    WebElement optoutElectronicYes;
-    @FindBy(xpath = "//input[@title='Agency Email Address']")
-    WebElement agencyEmail;
-    @FindBy(xpath = "//input[@title='Member's Email']")
-    WebElement membersEmail;
-    @FindBy(xpath = "//input[@title='Member's Primary Phone Number']")
-    WebElement membersPhone;
-    @FindBy(xpath = "//input[@title='Agency Email delivery (New Business only).']")
-    WebElement agendDelivery;
-
-    public void initiateDelivery() throws Throwable {
-        optoutElectronicYes.click();
-        Thread.sleep(3000);
-        agendDelivery.click();
-        agencyEmail.sendKeys("email@email.com");
-        membersEmail.sendKeys("email@email.com");
-        Thread.sleep(2000);
-        membersPhone.sendKeys("1231231231");
-        Thread.sleep(2000);
-        CommonComponentsAndActions.saveChanges.click();
-        membersPhone.clear();
-        membersPhone.sendKeys("1231231231");
-        Thread.sleep(2000);
-        CommonComponentsAndActions.saveChanges.click();
-
-    } //TODO break down in smaller methods; remove hardcode values; fix it
 }
-//TODO break down to components

@@ -7,6 +7,7 @@ import java.util.Map;
 
 public class LocationCoveragePage extends CommonComponentsAndActions {
     static WebDriver driver;
+
     LocationCoveragesComponent locationCoveragesComponent;
     LocationDetailsComponent locationDetailsComponent;
     GeoLocationDetailsComponents geoLocationDetailsComponents;
@@ -52,16 +53,5 @@ public class LocationCoveragePage extends CommonComponentsAndActions {
         Thread.sleep(10000);
         floodInformationComponent.setPureNFIP(data.get("PureNFIP"));
         elevationCertificateComponent.fillOutElevationCertificateInformation(data);
-    }
-    // TODO refactor
-    public void fillAdditionalLocationCoverageDetails(Map<String,String> data) throws InterruptedException {
-        usageComponent.setIsPrimaryResidenceYes();
-        mortgageeInformationComponent.setIsThereMortgageeOnLocationNo();
-        constructionDetailsComponent.fillAdditionalConstructionDetails(data);
-
-       //windMitigationComponent.fillBasicWindMitigationDetails(data[5],data[6],data[7],data[8],data[9]);
-       //protectionComponent.fillOutBasicProtectionDetails(data[10],data[11],data[12],data[13],data[14]);
-       //floodInformationComponent.setPureNFIP("Yes");
-
     }
 }

@@ -34,7 +34,7 @@ public class ReferralsComponent extends CommonComponentsAndActions{
     public void fillUnderwriterNotes(String note) throws InterruptedException {
         for (WebElement underwriterNote : underwriterNotes) {
             clickElement(underwriterNote);
-            Thread.sleep(100);
+            Thread.sleep(1000);
             typeText(underwriterNotesDiv.get(0),note);
             typeKeys(underwriterNote,Keys.TAB);
         }
@@ -48,5 +48,19 @@ public class ReferralsComponent extends CommonComponentsAndActions{
     }
     public List<WebElement> getReferrals() {
         return referralAlerts;
+    }
+    public void acceptUnacceptedReferral(String note) throws InterruptedException {
+        for (int i=0; i<overridden.size(); i++){
+            if(overridden.get(i).getText().equalsIgnoreCase("No")){
+                clickElement(underwriterNotes.get(i));
+                Thread.sleep(1000);
+                typeText(underwriterNotesDiv.get(0),note);
+                typeKeys(underwriterNotes.get(i),Keys.TAB);
+                Thread.sleep(1000);
+                clickElement(overridden.get(i));
+                Thread.sleep(1000);
+                clickElement(yesSelect);
+            }
+        }
     }
 }

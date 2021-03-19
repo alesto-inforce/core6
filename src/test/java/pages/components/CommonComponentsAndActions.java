@@ -47,28 +47,15 @@ public class CommonComponentsAndActions {
     public static WebElement underwritingReferrals;
     @FindBy(xpath = "//span[text()='premium']")
     public static WebElement premiumSummary;
-    @FindBy(xpath = "//span[contains(text(),'Customer: ')]")
+    @FindBy(xpath = "//span[contains(text(),'Customer: ')]/../../..")
     public static WebElement customer;
-
-
-    // TODO REFACTOR CORE UPGRADE
-    @FindBy(xpath = "//a[contains(text(),'Tools')]")
-    public static WebElement tools;
-    @FindBy(xpath = "//a[contains(text(),'Moratorium')]")
-    public static WebElement moratorium;
-    @FindBy(xpath = "//a[contains(text(),'Referral Category')]")
-    public static WebElement referralCategory;
-    @FindBy(xpath = "//div[@id='headerBar']/h2")
-    public static WebElement breadCrumb;
-    @FindBy(xpath = "#tabs>div:first-child a>span")
-    public static WebElement summary;
-    // TODO REFACTOR CORE UPGRADE
-
     // Header component elements - END
 
     // Footer component elements - START
     @FindBy(xpath = "//span[contains(text(),'>>> next')]")
     public static WebElement next;
+    @FindBy(xpath = "//span[contains(text(),'>>next')]")
+    public static WebElement next2;
     @FindBy(xpath = "//span[contains(text(),'>>> create  new customer')]")
     public static WebElement createNewCustomer;
     @FindBy(xpath = "//span[text()='save changes']")
@@ -81,28 +68,14 @@ public class CommonComponentsAndActions {
     public static WebElement sendEmailSignature;
     @FindBy(xpath = "//span[text()='create required forms']")
     public static WebElement createRequiredForms;
-
-    // TODO REFACTOR CORE UPGRADE
-    @FindBy(xpath = "//a[contains(text(),'>>> select agency ')]")
-    public static WebElement selectAgency;
-    @FindBy(xpath = "//a[contains(text(),'cancel')]")
-    public static WebElement cancel;
-    @FindBy(xpath = "//a[contains(text(),'>>next')]")
-    public static WebElement next2;
-    @FindBy(xpath = "//a[contains(text(),'>>confirm')]")
-    public static WebElement confirm;
-    @FindBy(xpath = "//a[contains(text(),'order property details')]")
-    public static WebElement orderPropertyDetails;
-    @FindBy(xpath = "//a[contains(text(),'>>> request issue')]")
+    @FindBy(xpath = "//span[contains(text(),'>>> request issue')]")
     public static WebElement requestIssue;
-    @FindBy(xpath = "//a[contains(text(),'bind')]")
+    @FindBy(xpath = "//span[contains(text(),'bind')]")
     public static WebElement bind;
-    @FindBy(xpath = "//a[contains(text(),'>>> request bind')]")
+    @FindBy(xpath = "//span[contains(text(),'>>confirm')]")
+    public static WebElement confirm2;
+    @FindBy(xpath = "//span[contains(text(),'>>> request bind')]")
     public static WebElement requestBind;
-    @FindBy(xpath = "#messages>li")
-    public static WebElement messages;
-    // TODO REFACTOR CORE UPGRADE
-
     // Footer component elements - END
 
     /**
@@ -162,14 +135,15 @@ public class CommonComponentsAndActions {
         }
     }
 
+    /**
+     * Given a Web element and a desired attribute it will set the attribute value
+     * @param element
+     * @param attribute
+     * @param value
+     */
     public void setAttributeValue(WebElement element, String attribute, String value){
         JavascriptExecutor js = (JavascriptExecutor)driver;
         js.executeScript("arguments[0].setAttribute(arguments[1], arguments[2]);",element,attribute,value);
-    }
-    public void jsSetValue(WebElement element, String value){
-        JavascriptExecutor js = (JavascriptExecutor)driver;
-        js.executeScript("arguments[0].value(arguments[1]);",element,value);
-        //TODO refactor function
     }
 
 }

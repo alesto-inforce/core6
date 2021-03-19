@@ -1,0 +1,175 @@
+[
+  {
+    "line": 3,
+    "elements": [
+      {
+        "start_timestamp": "2021-03-19T19:07:34.644Z",
+        "before": [
+          {
+            "result": {
+              "duration": 1796000000,
+              "status": "passed"
+            },
+            "match": {
+              "location": "tests.steps.underwriting.utilities.QuoteCreation.setup()"
+            }
+          }
+        ],
+        "line": 22,
+        "name": "Quote Creation",
+        "description": "",
+        "id": "quote-creation;quote-creation;;2",
+        "after": [
+          {
+            "result": {
+              "duration": 972000000,
+              "status": "passed"
+            },
+            "match": {
+              "location": "tests.steps.underwriting.utilities.QuoteCreation.tearDown()"
+            }
+          }
+        ],
+        "type": "scenario",
+        "keyword": "Scenario Outline",
+        "steps": [
+          {
+            "result": {
+              "duration": 5917000000,
+              "status": "passed"
+            },
+            "line": 12,
+            "name": "I am logged in to Pure as \"Field\"",
+            "match": {
+              "arguments": [
+                {
+                  "val": "\"Field\"",
+                  "offset": 26
+                }
+              ],
+              "location": "tests.steps.underwriting.utilities.QuoteCreation.iAmLoggedInToPureAs(java.lang.String)"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 1285000000,
+              "status": "passed"
+            },
+            "line": 13,
+            "name": "I navigate to Quotes",
+            "match": {
+              "location": "tests.steps.underwriting.utilities.QuoteCreation.iNavigateToQuotes()"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 29434000000,
+              "status": "passed"
+            },
+            "line": 14,
+            "name": "I initiate a new quote for a new customer with location in \"FL\" \"12th Street, Miami Beach, FL, USA\" \"Miami Beach\" \"33139\"",
+            "match": {
+              "arguments": [
+                {
+                  "val": "\"FL\"",
+                  "offset": 59
+                },
+                {
+                  "val": "\"12th Street, Miami Beach, FL, USA\"",
+                  "offset": 64
+                },
+                {
+                  "val": "\"Miami Beach\"",
+                  "offset": 100
+                },
+                {
+                  "val": "\"33139\"",
+                  "offset": 114
+                }
+              ],
+              "location": "tests.steps.underwriting.utilities.QuoteCreation.iInitiateANewQuoteForANewCustomerWithLocationIn(java.lang.String,java.lang.String,java.lang.String,java.lang.String)"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 160732000000,
+              "status": "passed"
+            },
+            "line": 15,
+            "name": "I create a quote",
+            "match": {
+              "location": "tests.steps.underwriting.utilities.QuoteCreation.iCreateAQuote()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 75793000000,
+              "status": "passed"
+            },
+            "line": 16,
+            "name": "I accept underwriting referrals",
+            "match": {
+              "location": "tests.steps.underwriting.utilities.QuoteCreation.iAcceptUnderwritingReferrals()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 321610000000,
+              "status": "passed"
+            },
+            "line": 17,
+            "name": "I create required forms",
+            "match": {
+              "location": "tests.steps.underwriting.utilities.QuoteCreation.createRequiredForms()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 174627000000,
+              "status": "passed"
+            },
+            "line": 18,
+            "name": "I request Issue",
+            "match": {
+              "location": "tests.steps.underwriting.utilities.QuoteCreation.iRequestIssue()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "error_message": "java.lang.NullPointerException\r\n\tat pages.PolicyDeliveryPage.fillPrintAndDeliveryOptions(PolicyDeliveryPage.java:28)\r\n\tat tests.steps.underwriting.utilities.QuoteCreation.iBindAQuote(QuoteCreation.java:217)\r\n\tat ✽.I bind a quote(file:///C:/Users/astojanovic/IdeaProjects/core6/src/test/java/feature_files/underwriting/utilities/QuoteCreation.feature:19)\r\n",
+              "duration": 60175000000,
+              "status": "failed"
+            },
+            "line": 19,
+            "name": "I bind a quote",
+            "match": {
+              "location": "tests.steps.underwriting.utilities.QuoteCreation.iBindAQuote()"
+            },
+            "keyword": "And "
+          }
+        ],
+        "tags": [
+          {
+            "name": "@Underwriting"
+          },
+          {
+            "name": "@QuoteCreation"
+          }
+        ]
+      }
+    ],
+    "name": "Quote Creation",
+    "description": "",
+    "id": "quote-creation",
+    "keyword": "Feature",
+    "uri": "file:src/test/java/feature_files/underwriting/utilities/QuoteCreation.feature",
+    "tags": []
+  }
+]

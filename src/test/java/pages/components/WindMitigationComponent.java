@@ -25,11 +25,6 @@ public class WindMitigationComponent extends CommonComponentsAndActions {
     @FindBy(xpath = "//div[text()='Roof Deck']/../../../..//input")
     WebElement roofDeckSelect;
 
-    // TODO CORE UPGRADE REFACTOR
-    @FindBy(xpath = "//select[@title='Roof Covering']")
-    WebElement roofCoveringSelect;
-    // TODO CORE UPGRADE REFACTOR
-
     public void fillBasicWindMitigationDetails(Map<String,String> data) throws InterruptedException {
         setRoofShape(data.get("RoofShape"));
         setSecondaryWaterResistance(data.get("SecondaryWaterResistance"));
@@ -38,7 +33,6 @@ public class WindMitigationComponent extends CommonComponentsAndActions {
         clickElement(CommonComponentsAndActions.saveChanges);
         Thread.sleep(10000);
     }
-
     public void setRoofShape(String roofShapeValue) {
         typeText(roofShapeSelect,roofShapeValue);
     }
@@ -47,9 +41,6 @@ public class WindMitigationComponent extends CommonComponentsAndActions {
     }
     public void setOpeningProtection(String openingProtectionValue) {
         typeText(openingProtectionSelect,openingProtectionValue);
-    }
-    public void setRoofCovering(String roofCoveringValue) {
-        typeText(roofCoveringSelect,roofCoveringValue);
     }
     public void setRoofDeck(String roofDeckValue) {
         typeText(roofDeckSelect,roofDeckValue);

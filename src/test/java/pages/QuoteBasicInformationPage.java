@@ -119,11 +119,11 @@ public class QuoteBasicInformationPage extends CommonComponentsAndActions {
         }
     }
     // Types in the Effective Date
-    public void setEffectiveDate(String effectiveDateValue) throws InterruptedException {
+    public void setEffectiveDate(String effectiveDateValue) {
         typeText(effectiveDate,effectiveDateValue);
     }
     // Types in the date Of Birth
-    public void setDateOfBirth(String dateOfBirthValue) throws InterruptedException {
+    public void setDateOfBirth(String dateOfBirthValue) {
         typeText(dateOfBirth,dateOfBirthValue);
     }
     // Types in the First Name
@@ -143,15 +143,15 @@ public class QuoteBasicInformationPage extends CommonComponentsAndActions {
         typeText(memberOccupation,memberOccupationValue);
     }
     // Sets Risk State
-    public void setRiskState(String riskStateValue) throws InterruptedException {
+    public void setRiskState(String riskStateValue) {
         typeText(riskState,riskStateValue);
     }
     // Sets State
-    public void setState(String stateValue) throws InterruptedException {
+    public void setState(String stateValue) {
         typeText(state.get(0),stateValue);
     }
     // Selects - Admitted or Surplus Lines:
-    public void selectAdmittedOrSurplus(String admittedOrSurplusValue) throws InterruptedException {
+    public void selectAdmittedOrSurplus(String admittedOrSurplusValue) {
         typeText(admittedOrSurplus,admittedOrSurplusValue);
     }
     // Checks - Which admitted lines would you like to quote?
