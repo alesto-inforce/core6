@@ -19,8 +19,7 @@ public class MortgageeInformationComponent extends CommonComponentsAndActions{
     @FindBy(xpath = "//div[text()='Is there, or will there be a mortgage on this location? (Excluding lines of credit)']/../../../../div//label[text()='Yes']/..//input")
     WebElement isThereOrWillBeMortgageOnThisLocationYes;
 
-    public void setIsThereMortgageeOnLocationNo() {
-        clickElement(isThereOrWillBeMortgageOnThisLocationNo);
+    public void setIsThereOrWillBeMortgageOnThisLocation(String choose) throws Throwable {
+        choose(isThereOrWillBeMortgageOnThisLocationYes,isThereOrWillBeMortgageOnThisLocationNo, choose);
     }
-
 }

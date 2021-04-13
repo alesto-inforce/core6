@@ -25,22 +25,22 @@ public class AppraisalInformationComponent extends CommonComponentsAndActions{
     @FindBy(xpath = "//div[text()='Contact Phone Number']/../../../../div//input")
     public WebElement contactPhoneNumber;
 
-    public void fillOutAppraisalInformation(Map<String,String> data){
+    public void fillOutAppraisalInformation(Map<String,String> data) throws Throwable {
         requireAppraisalComments(data.get("AppraisalComment"));
         setContactName(data.get("ContactName"));
         contactEmail(data.get("ContactEmail"));
         setContactPhoneNumber(data.get("ContactPhone"));
     }
-    public void requireAppraisalComments(String comment) {
+    public void requireAppraisalComments(String comment) throws Throwable {
         typeText(requireAppraisalComments,comment);
     }
-    public void setContactName(String name) {
+    public void setContactName(String name) throws Throwable {
         typeText(contactName,name);
     }
-    public void contactEmail(String email) {
+    public void contactEmail(String email) throws Throwable {
         typeText(contactEmail,email);
     }
-    public void setContactPhoneNumber(String phone) {
+    public void setContactPhoneNumber(String phone) throws Throwable {
         typeText(contactPhoneNumber,phone);
     }
 }

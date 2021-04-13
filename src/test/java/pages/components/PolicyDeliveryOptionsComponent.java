@@ -24,7 +24,7 @@ public class PolicyDeliveryOptionsComponent extends CommonComponentsAndActions{
     @FindBy(xpath = "//label[contains(text(),'Agency Email delivery (New Business only).')]/..//input")
     public static WebElement agencyDelivery;
 
-    public void optOutElectronicDelivery(String optOut){
+    public void optOutElectronicDelivery(String optOut) throws Throwable {
         if (optOut.equalsIgnoreCase("Yes")){
             clickElement(optOutYes);
         } else {
@@ -32,7 +32,7 @@ public class PolicyDeliveryOptionsComponent extends CommonComponentsAndActions{
         }
     }
 
-    public void howToDeliverDocs(String deliveryOption) {
+    public void howToDeliverDocs(String deliveryOption) throws Throwable {
         if(deliveryOption.equalsIgnoreCase("PrintByPure")){
             clickElement(printByPure);
         } else {

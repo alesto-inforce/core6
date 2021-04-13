@@ -19,7 +19,7 @@ public class LossClaimHistoryComponent extends CommonComponentsAndActions{
     @FindBy(xpath = "//div[text()='Any prior losses on this location over the past five years?']/../../../..//label[text()='No']/..//input")
     WebElement priorLossesNo;
 
-    public void setPriorLossesNo(){
+    public void setPriorLossesNo() throws Throwable {
         clickElement(priorLossesNo);
     }
 

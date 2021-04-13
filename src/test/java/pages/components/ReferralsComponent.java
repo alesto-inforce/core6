@@ -31,15 +31,14 @@ public class ReferralsComponent extends CommonComponentsAndActions{
     @FindBy(xpath = "//li[text()='Yes']")
     WebElement yesSelect;
 
-    public void fillUnderwriterNotes(String note) throws InterruptedException {
+    public void fillUnderwriterNotes(String note) throws Throwable {
         for (WebElement underwriterNote : underwriterNotes) {
             clickElement(underwriterNote);
             Thread.sleep(1000);
             typeText(underwriterNotesDiv.get(0),note);
-            typeKeys(underwriterNote,Keys.TAB);
         }
     }
-    public void setAllOverriddenYes() throws InterruptedException {
+    public void setAllOverriddenYes() throws Throwable {
         for (WebElement webElement : overridden) {
             clickElement(webElement);
             Thread.sleep(1000);
@@ -49,13 +48,12 @@ public class ReferralsComponent extends CommonComponentsAndActions{
     public List<WebElement> getReferrals() {
         return referralAlerts;
     }
-    public void acceptUnacceptedReferral(String note) throws InterruptedException {
+    public void acceptUnacceptedReferral(String note) throws Throwable {
         for (int i=0; i<overridden.size(); i++){
             if(overridden.get(i).getText().equalsIgnoreCase("No")){
                 clickElement(underwriterNotes.get(i));
                 Thread.sleep(1000);
                 typeText(underwriterNotesDiv.get(0),note);
-                typeKeys(underwriterNotes.get(i),Keys.TAB);
                 Thread.sleep(1000);
                 clickElement(overridden.get(i));
                 Thread.sleep(1000);

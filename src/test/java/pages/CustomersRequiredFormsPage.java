@@ -16,7 +16,7 @@ public class CustomersRequiredFormsPage extends CommonComponentsAndActions {
         PageFactory.initElements(driver,this);
     }
 
-    public void navigateToCustomer() {
+    public void navigateToCustomer() throws Throwable {
         clickElement(CommonComponentsAndActions.customer);
     }
 }

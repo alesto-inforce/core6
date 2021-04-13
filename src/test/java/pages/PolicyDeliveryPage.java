@@ -22,11 +22,11 @@ public class PolicyDeliveryPage extends CommonComponentsAndActions {
         printAndMailDeliveryPreferenceComponent = new PrintAndMailDeliveryPreferenceComponent(driver);
         PageFactory.initElements(driver,this);
     }
-    public void  fillPolicyDeliveryOptions(Map<String,String> data){
+    public void  fillPolicyDeliveryOptions(Map<String,String> data) throws Throwable {
         policyDeliveryOptionsComponent.optOutElectronicDelivery(data.get("OptOutOfDelivery"));
         policyDeliveryOptionsComponent.howToDeliverDocs(data.get("DeliveryOptions"));
     }
-    public void fillPrintAndDeliveryOptions() throws InterruptedException {
+    public void fillPrintAndDeliveryOptions() throws Throwable {
         printAndMailDeliveryPreferenceComponent.fillPrintAndDeliveryOptions();
     }
 

@@ -7,6 +7,7 @@ import org.openqa.selenium.support.PageFactory;
 import pages.components.CommonComponentsAndActions;
 
 import java.util.List;
+import java.util.Map;
 
 public class QuotesPage extends CommonComponentsAndActions {
     static WebDriver driver;
@@ -30,11 +31,11 @@ public class QuotesPage extends CommonComponentsAndActions {
     @FindBy(xpath = "//input[@placeholder='Enter Number...']")
     List<WebElement> filterFields;
 
-    public void newQuote(){
+    public void newQuote() throws Throwable {
         clickElement(newQuote);
     }
 
-    public void searchAndSelectAgencyAdvanced(String env) throws InterruptedException {
+    public void searchAndSelectAgencyAdvanced(String env) throws Throwable {
         String brokerID = "";
         String agency = "";
 

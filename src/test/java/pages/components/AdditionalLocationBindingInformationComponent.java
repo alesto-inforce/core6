@@ -29,7 +29,7 @@ public class AdditionalLocationBindingInformationComponent extends CommonCompone
     @FindBy(xpath = "//div[text()='Has coverage been non-renewed or Declined?']/../../../../div//label[text()='Yes']/..//input")
     WebElement coverageNonRenewedOrDeclinedYes;
 
-    public void fillOutAdditionalLocationBindingInformation(Map<String,String> data){
+    public void fillOutAdditionalLocationBindingInformation(Map<String,String> data) throws Throwable {
         if(data.get("ExistingAgencyClient").equalsIgnoreCase("Yes")){
             setExistingAgencyClientYes();
         } else {
@@ -47,22 +47,22 @@ public class AdditionalLocationBindingInformationComponent extends CommonCompone
         }
     }
 
-    public void setExistingAgencyClientNo() {
+    public void setExistingAgencyClientNo() throws Throwable {
         clickElement(existingAgencyClientNo);
     }
-    public void setExistingAgencyClientYes() {
+    public void setExistingAgencyClientYes() throws Throwable {
         clickElement(existingAgencyClientYes);
     }
-    public void setCancelledOrRefusedNo() {
+    public void setCancelledOrRefusedNo() throws Throwable {
         clickElement(cancelledOrRefusedNo);
     }
-    public void setCancelledOrRefusedYes() {
+    public void setCancelledOrRefusedYes() throws Throwable {
         clickElement(cancelledOrRefusedYes);
     }
-    public void setCoverageNonRenewedOrDeclinedNo() {
+    public void setCoverageNonRenewedOrDeclinedNo() throws Throwable {
         clickElement(coverageNonRenewedOrDeclinedNo);
     }
-    public void setCoverageNonRenewedOrDeclinedYes() {
+    public void setCoverageNonRenewedOrDeclinedYes() throws Throwable {
         clickElement(coverageNonRenewedOrDeclinedYes);
     }
 }

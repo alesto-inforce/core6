@@ -15,7 +15,7 @@
         <parameter name="ENV" value="QA"/>
         <parameter name="BROWSER" value="CHROME"/>
         <classes>
-            <class name="tests.runners.TestNGCucumberRunner"/>
+            <class name="tests.runners.underwriting.QuoteCreatorSerialSTG"/>
         </classes>
     </test>
 

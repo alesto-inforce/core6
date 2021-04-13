@@ -4,18 +4,21 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Reporter;
+
+import java.text.DecimalFormat;
 
 public class CommonComponentsAndActions {
 
     static WebDriver driver;
     static final int WAIT_TIME = Integer.parseInt(Reporter.getCurrentTestResult().getTestContext().getCurrentXmlTest().getParameter("WAIT_TIME"));
 
-    public CommonComponentsAndActions(WebDriver driver){
+    public CommonComponentsAndActions(WebDriver driver) {
         CommonComponentsAndActions.driver = driver;
-        PageFactory.initElements(driver,this);
+        PageFactory.initElements(driver, this);
     }
 
     // Header component elements - START
@@ -76,74 +79,249 @@ public class CommonComponentsAndActions {
     public static WebElement confirm2;
     @FindBy(xpath = "//span[contains(text(),'>>> request bind')]")
     public static WebElement requestBind;
+    @FindBy(xpath = "//span[contains(text(),'new quote')]")
+    public static WebElement newQuote;
     // Footer component elements - END
 
     /**
-     * Use this method to click a WebElement
+     * Scrolls to a WebElement with JS Executor
+     *
      * @param element WebElement
      */
-    public void clickElement(WebElement element) {
+    public void scrollToWebElement(WebElement element) {
+        try {
+            ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true)", element);
+        } catch (Exception e) {
+            System.out.println("LOG - Unable to scroll to " + element.getTagName() + " element");
+            System.out.println(e.getMessage());
+            e.getStackTrace();
+        }
+    }
+
+    /**
+     * Wait for mask
+     */
+    public void waitForMask() {
+        ExpectedCondition<Boolean> xMasked = driver -> !((Boolean) driver.findElement(By.tagName("body")).getAttribute("class").contains("x-masked"));
+        new WebDriverWait(driver, WAIT_TIME).until(xMasked);
+    }
+
+    /**
+     * Wait for the Pre Loading Mask to disappear
+     */
+    public void waitForPreLoadingMask() throws InterruptedException {
+        pause(200);
+        if (driver.findElement(By.xpath("div[text='processing']")).isDisplayed()) {
+            ExpectedCondition<Boolean> processing = driver -> !(driver.findElement(By.xpath("//div[text()='processing']")).isDisplayed());
+            new WebDriverWait(driver, WAIT_TIME).until(processing);
+        }
+        ExpectedCondition<Boolean> xMasked = driver -> !((Boolean) driver.findElement(By.tagName("body")).getAttribute("class").contains("x-masked"));
+        new WebDriverWait(driver, WAIT_TIME).until(xMasked);
+        pause(200);
+    }
+
+    /**
+     * Thread.sleeps
+     *
+     * @param ms milliseconds
+     * @throws InterruptedException exception
+     */
+    public void pause(int ms) throws InterruptedException {
+        Thread.sleep(ms);
+    }
+
+    /**
+     * Use this method to click a WebElement
+     *
+     * @param element WebElement
+     */
+    public void clickElement(WebElement element) throws Throwable {
         try {
             WebDriverWait wait = new WebDriverWait(driver, WAIT_TIME);
+            scrollToWebElement(element);
             wait.until(ExpectedConditions.visibilityOf(element));
             wait.until(ExpectedConditions.elementToBeClickable(element));
-            try{
-                Actions actions = new Actions(driver);
-                actions.moveToElement(element);
-                actions.build().perform();
+            //waitForMask();
+            //waitForPreLoadingMask();
+            try {
                 element.click();
-            }
-            catch(StaleElementReferenceException e) {
+                clickElementWithOffset(element, 30, 30);
+            } catch (StaleElementReferenceException e) {
+                System.out.println("LOG - Got a stale " + element.getTagName() + " element, retrying click !");
                 element.click();
+                clickElementWithOffset(element, 30, 30);
             }
-        } catch (Exception e) {
-            e.printStackTrace();
+            waitForMask();
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+            ex.getStackTrace();
         }
     }
 
     /**
      * Types text into WebElement
+     *
      * @param element WebElement
-     * @param text Text
+     * @param text    Text
      */
-    public void typeText(WebElement element, String text) {
+    public void typeText(WebElement element, String text) throws Throwable {
         try {
             WebDriverWait wait = new WebDriverWait(driver, WAIT_TIME);
+            scrollToWebElement(element);
             wait.until(ExpectedConditions.visibilityOf(element));
             wait.until(ExpectedConditions.elementToBeClickable(element));
+            //waitForMask();
+            //waitForPreLoadingMask();
+            clickElement(element);
             element.clear();
             element.sendKeys(text);
             element.sendKeys(Keys.ENTER);
-        }  catch (Exception e) {
-            e.printStackTrace();
+            element.sendKeys(Keys.TAB);
+            //waitForPreLoadingMask();
+            clickElementWithOffset(element, 30, 30);
+        } catch (Exception e) {
+            System.out.println("LOG - Tried to type " + text + " to " + element.getTagName() + " element");
+            System.out.println(e.getMessage());
+            e.getStackTrace();
         }
     }
 
     /**
-     * Types keys into WebElement
-     * @param element WebElement
-     * @param keys Keys
+     * Returns text from an element
+     *
+     * @param element
+     * @return
      */
-    public void typeKeys(WebElement element, Keys keys) {
+    public String getText(WebElement element) {
+        String text = "";
         try {
             WebDriverWait wait = new WebDriverWait(driver, WAIT_TIME);
             wait.until(ExpectedConditions.visibilityOf(element));
             wait.until(ExpectedConditions.elementToBeClickable(element));
-            element.sendKeys(keys);
-        }  catch (Exception e) {
-            e.printStackTrace();
+            text = element.getText().trim();
+        } catch (Exception e) {
+            System.out.println("LOG - Tried to get text from " + element.getTagName() + " element");
+            System.out.println(e.getMessage());
+            e.getStackTrace();
         }
+        return text;
     }
 
     /**
      * Given a Web element and a desired attribute it will set the attribute value
+     *
      * @param element
      * @param attribute
      * @param value
      */
-    public void setAttributeValue(WebElement element, String attribute, String value){
-        JavascriptExecutor js = (JavascriptExecutor)driver;
-        js.executeScript("arguments[0].setAttribute(arguments[1], arguments[2]);",element,attribute,value);
+    public void setAttributeValue(WebElement element, String attribute, String value) {
+        WebDriverWait wait = new WebDriverWait(driver, WAIT_TIME);
+        wait.until(ExpectedConditions.visibilityOf(element));
+        wait.until(ExpectedConditions.elementToBeClickable(element));
+        try {
+            JavascriptExecutor js = (JavascriptExecutor) driver;
+            js.executeScript("arguments[0].setAttribute(arguments[1], arguments[2]);", element, attribute, value);
+        } catch (Exception e) {
+            System.out.println("LOG - Tried to set " + value + " value to " + attribute + " attribute to " + element.getTagName() + " element");
+        }
     }
 
+    /**
+     * Chooses an element to click based on yes or no parameter
+     *
+     * @param elementYes element to click if yes
+     * @param elementNo  element to click if no
+     * @param yesOrNo    yes or no
+     */
+    public void choose(WebElement elementYes, WebElement elementNo, String yesOrNo) throws Throwable {
+        if (yesOrNo.equalsIgnoreCase("Yes") || yesOrNo.equalsIgnoreCase("1")) {
+            clickElement(elementYes);
+        } else {
+            clickElement(elementNo);
+        }
+    }
+
+    /**
+     * Given true or false it will select a checkbox or deselect it
+     *
+     * @param element
+     * @param checked
+     */
+    public void checkCheckbox(WebElement element, String checked) throws Throwable {
+        if (checked.equalsIgnoreCase("Yes") || checked.equalsIgnoreCase("1")) {
+            if (!element.isSelected()) {
+                clickElement(element);
+            }
+        } else {
+            if (element.isSelected()) {
+                clickElement(element);
+            }
+        }
+    }
+
+    /**
+     * Clicks a web element with a given offset
+     *
+     * @param element WebElement
+     * @param xOffset X offset
+     * @param yOffset Y offset
+     */
+    public void clickElementWithOffset(WebElement element, int xOffset, int yOffset) {
+        Actions actions = new Actions(driver);
+        try {
+            actions.moveToElement(element, xOffset, yOffset).build().perform();
+        } catch (Exception e) {
+            //System.out.println("LOG - Tried to click " + element.getTagName() + " element with offset " + xOffset + " " + yOffset);
+            //e.printStackTrace();
+        }
+    }
+
+    /**
+     * Clicks an element with JS
+     * @param element
+     */
+    public void clickElementJS(WebElement element){
+        try {
+            try {
+                WebDriverWait wait = new WebDriverWait(driver, WAIT_TIME);
+                scrollToWebElement(element);
+                wait.until(ExpectedConditions.visibilityOf(element));
+                wait.until(ExpectedConditions.elementToBeClickable(element));
+                ((JavascriptExecutor) driver).executeScript("arguments[0].click();", element);
+                //waitForMask();
+            } catch (StaleElementReferenceException ex){
+                ((JavascriptExecutor) driver).executeScript("arguments[0].click();", element);
+            }
+        }catch (Exception e){
+            System.out.println("LOG - Tried to click "+element.getTagName()+" element with JS");
+            System.out.println(e.getMessage());
+            e.getStackTrace();
+        }
+    }
+
+    /**
+     * Accepts an alert
+     */
+    public void acceptAlert() {
+        try {
+            WebDriverWait wait = new WebDriverWait(driver, 2);
+            wait.until(ExpectedConditions.alertIsPresent());
+            driver.switchTo().alert().accept();
+        } catch (Exception e) {
+            System.out.println("LOG - Tried to accept an alert");
+            System.out.println(e.getMessage());
+            e.getStackTrace().toString();
+        }
+    }
+
+    /**
+     * Formats num to match #,###.00 pattern
+     * @param num
+     * @return
+     */
+    public String formatNum(String num){
+        double doubleNum = Double.parseDouble(num);
+        DecimalFormat formatter = new DecimalFormat("#,###.00");
+        return formatter.format(doubleNum).replace(".00","");
+    }
 }

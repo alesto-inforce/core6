@@ -24,17 +24,17 @@ public class PersonalCyberFraudProtectionComponent extends CommonComponentsAndAc
     @FindBy(xpath = "//div[text()='Deductible']/../../../..//input")
     WebElement deductible;
 
-    public void setDefenceCoverageYes(){
+    public void setDefenceCoverageYes() throws Throwable {
         clickElement(defenceCoverageYes);
     }
-    public void setDefenceCoverageNo(){
+    public void setDefenceCoverageNo() throws Throwable {
         clickElement(defenceCoverageNo);
     }
-    public void setLimit(String value){
+    public void setLimit(String value) throws Throwable {
         typeText(limit,value);
 
     }
-    public void deductible(String value){
+    public void deductible(String value) throws Throwable {
         typeText(deductible,value);
     }
 }

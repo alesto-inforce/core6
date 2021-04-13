@@ -19,7 +19,7 @@ public class CustomerSummaryPage extends CommonComponentsAndActions {
         PageFactory.initElements(driver,this);
     }
 
-    public void navigateToQuote(){
+    public void navigateToQuote() throws Throwable {
         allQuotesComponent.navigateToQuote();
     }
 

@@ -18,7 +18,7 @@ public class HomeownersPolicyCoverPage extends CommonComponentsAndActions {
     RiskAddressesComponent riskAddressesComponent;
     LiabilityCoveragesComponent liabilityCoveragesComponent;
     PersonalCyberFraudProtectionComponent personalCyberFraudProtectionComponent;
-
+    WorkersCompensationCoverageComponent workersCompensationCoverageComponent;
     public HomeownersPolicyCoverPage(WebDriver driver) {
         super(driver);
         HomeownersPolicyCoverPage.driver = driver;
@@ -30,16 +30,26 @@ public class HomeownersPolicyCoverPage extends CommonComponentsAndActions {
         riskAddressesComponent                  = new RiskAddressesComponent(driver);
         liabilityCoveragesComponent             = new LiabilityCoveragesComponent(driver);
         personalCyberFraudProtectionComponent   = new PersonalCyberFraudProtectionComponent(driver);
+        workersCompensationCoverageComponent    = new WorkersCompensationCoverageComponent(driver);
         PageFactory.initElements(driver,this);
     }
 
-    public void fillOutHomeownersPolicyCoverPage(Map<String,String> data) throws InterruptedException {
-        riskAddressesComponent.riskAddressDetails(data);
-        Thread.sleep(3000);
-        liabilityCoveragesComponent.selectLiabilityCoveragesLimit(data);
+    public void fillOutHomeownersPolicyCoverPage(Map<String,String> data) throws Throwable {
+        if(data.get("State").equalsIgnoreCase("NJ")){
+            riskAddressesComponent.riskAddressDetails(data);
+            Thread.sleep(3000);
+            liabilityCoveragesComponent.selectLiabilityCoveragesLimit(data);
+            //TODO add cyber
+            workersCompensationCoverageComponent.fillWorkerCoverageDetails(data);
+        }else{
+            riskAddressesComponent.riskAddressDetails(data);
+            Thread.sleep(3000);
+            liabilityCoveragesComponent.selectLiabilityCoveragesLimit(data);
+            //TODO add cyber
+        }
     }
-    // Use QuoteCreation.xlsx/AdditionalLocations
-    public void addAdditionalLocation(Map<String,String> data) {
+
+    public void addAdditionalLocation(Map<String,String> data) throws Throwable {
         riskAddressesComponent.addAndFillInNthAddress(data);
     }
 

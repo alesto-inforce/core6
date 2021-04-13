@@ -17,7 +17,7 @@ public class InspectionPage extends CommonComponentsAndActions {
         inspectionInformationComponent = new InspectionInformationComponent(driver);
         PageFactory.initElements(driver,this);
     }
-    public void fillOutInspectionDetails(Map<String,String> data){
+    public void fillOutInspectionDetails(Map<String,String> data) throws Throwable {
         inspectionInformationComponent.fillOutInspectionInformation(data.get("InspectionName"),data.get("InspectionDate"));
     }
 

@@ -19,16 +19,16 @@ public class InspectionInformationComponent extends CommonComponentsAndActions{
     @FindBy(xpath = "//div[text()='Inspection Date']/../../../../div//..//input")
     WebElement inspectionDate;
 
-    public void fillOutInspectionInformation(String name, String date){
+    public void fillOutInspectionInformation(String name, String date) throws Throwable {
         setInspectionCompanyName(name);
         setInspectionDate(date);
     }
 
-    public void setInspectionCompanyName(String name){
+    public void setInspectionCompanyName(String name) throws Throwable {
         typeText(nameOfInspectionCompany,name);
     }
 
-    public void setInspectionDate(String date){
+    public void setInspectionDate(String date) throws Throwable {
         typeText(inspectionDate, date);
     }
 }

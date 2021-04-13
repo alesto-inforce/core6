@@ -21,6 +21,7 @@ public class LocationCoveragePage extends CommonComponentsAndActions {
     ElevationCertificateComponent elevationCertificateComponent;
     StormSurgeComponent stormSurgeComponent;
     WindPoolComponent windPoolComponent;
+    RoofCharacteristicComponent roofCharacteristicComponent;
 
     public LocationCoveragePage(WebDriver driver) {
         super(driver);
@@ -38,20 +39,230 @@ public class LocationCoveragePage extends CommonComponentsAndActions {
         elevationCertificateComponent = new ElevationCertificateComponent(driver);
         stormSurgeComponent = new StormSurgeComponent(driver);
         windPoolComponent = new WindPoolComponent(driver);
+        roofCharacteristicComponent = new RoofCharacteristicComponent(driver);
         PageFactory.initElements(driver,this);
     }
 
-    public void fillBasicLocationCoverageDetails(Map<String,String> data) throws InterruptedException {
-        usageComponent.setIsPrimaryResidenceYes();
-        if(data.get("ResidenceType").equalsIgnoreCase("Homeowner")){
-            mortgageeInformationComponent.setIsThereMortgageeOnLocationNo();
-            Thread.sleep(6000);
+    public void fillBasicLocationCoverageDetails(Map<String,String> data) throws Throwable {
+        switch (data.get("Residence_Type")){
+            case "Homeowner":{
+                switch (data.get("State")){
+                    case "AK":{
+                        usageComponent.fillUsageDetails(data);
+                        mortgageeInformationComponent.setIsThereOrWillBeMortgageOnThisLocation(data.get("Is_There_Mortgage"));
+                        Thread.sleep(6000);
+                        constructionDetailsComponent.fillBasicConstructionDetails(data);
+                        windMitigationComponent.fillBasicWindMitigationDetails(data);
+                        protectionComponent.fillOutBasicProtectionDetails(data);
+                        Thread.sleep(6000);
+                        floodInformationComponent.fillOutFloodInformationDetails(data);
+                    }break;
+                    case "AR":{
+                        usageComponent.fillUsageDetails(data);
+                        mortgageeInformationComponent.setIsThereOrWillBeMortgageOnThisLocation(data.get("Is_There_Mortgage"));
+                        Thread.sleep(6000);
+                        constructionDetailsComponent.fillBasicConstructionDetails(data);
+                        roofCharacteristicComponent.fillInRoofCharacteristics(data);
+                        protectionComponent.fillOutBasicProtectionDetails(data);
+                        Thread.sleep(6000);
+                        floodInformationComponent.fillOutFloodInformationDetails(data);
+                    }break;
+
+
+
+
+
+
+                    case "IA":
+                    case "IN":
+                    case "KS":
+                    case "KY":
+                    case "MN":
+                    case "MO":
+                    case "MT":
+                    case "ND":
+                    case "NE":
+                    case "NH":
+                    case "OH":
+                    case "OK":
+                    case "SD":
+                    case "WI":
+                    case "WY":
+                    case "MD":
+                    case "ME":
+                    case "MS":
+                    case "TX":
+                    case "GA":
+                    case "AZ":
+                    case "DC":
+                    case "IL":
+                    case "NM":
+                    case "NV":
+                    case "OR":
+                    case "PA":
+                    case "UT":
+                    case "VT":
+                    case "WV":
+                    case "MI":
+                    case "CO":
+                    case "RI":
+                    case "TN":
+                    case "WA":
+                    case "CA":
+                    case "AL":
+                    case "LA":
+                    case "MA":
+                    case "DE":
+                    case "HI":
+                    case "VA":
+                    case "NC":
+                    case "SC":
+                    case "FL":
+                    case "CT":
+                    case "NY":
+                    case "NJ":
+                }
+            }break;
+
+
+
+
+
+
+            //TODO
+            case "Condo/Co-op":{
+                switch (data.get("State")){
+                    case "AK":{
+                        usageComponent.fillUsageDetails(data);
+                        constructionDetailsComponent.fillBasicConstructionDetails(data);
+                        protectionComponent.fillOutBasicProtectionDetails(data);
+                        Thread.sleep(6000);
+                        floodInformationComponent.fillOutFloodInformationDetails(data);
+                    }break;
+
+
+
+
+
+
+                    case "AR":
+                    case "IA":
+                    case "IN":
+                    case "KS":
+                    case "KY":
+                    case "MN":
+                    case "MO":
+                    case "MT":
+                    case "ND":
+                    case "NE":
+                    case "NH":
+                    case "OH":
+                    case "OK":
+                    case "SD":
+                    case "WI":
+                    case "WY":
+                    case "MD":
+                    case "ME":
+                    case "MS":
+                    case "TX":
+                    case "GA":
+                    case "AZ":
+                    case "DC":
+                    case "IL":
+                    case "NM":
+                    case "NV":
+                    case "OR":
+                    case "PA":
+                    case "UT":
+                    case "VT":
+                    case "WV":
+                    case "MI":
+                    case "CO":
+                    case "RI":
+                    case "TN":
+                    case "WA":
+                    case "CA":
+                    case "AL":
+                    case "LA":
+                    case "MA":
+                    case "DE":
+                    case "HI":
+                    case "VA":
+                    case "NC":
+                    case "SC":
+                    case "FL":
+                    case "CT":
+                    case "NY":
+                    case "NJ":
+                }
+            }break;
+            case "Tenants":{
+                switch (data.get("State")){
+                    case "AK":{
+                        usageComponent.fillUsageDetails(data);
+                        constructionDetailsComponent.fillBasicConstructionDetails(data);
+                        windMitigationComponent.fillBasicWindMitigationDetails(data);
+                        protectionComponent.fillOutBasicProtectionDetails(data);
+                        Thread.sleep(6000);
+                        floodInformationComponent.fillOutFloodInformationDetails(data);
+                    }break;
+
+
+
+
+
+
+                    case "AR":
+                    case "IA":
+                    case "IN":
+                    case "KS":
+                    case "KY":
+                    case "MN":
+                    case "MO":
+                    case "MT":
+                    case "ND":
+                    case "NE":
+                    case "NH":
+                    case "OH":
+                    case "OK":
+                    case "SD":
+                    case "WI":
+                    case "WY":
+                    case "MD":
+                    case "ME":
+                    case "MS":
+                    case "TX":
+                    case "GA":
+                    case "AZ":
+                    case "DC":
+                    case "IL":
+                    case "NM":
+                    case "NV":
+                    case "OR":
+                    case "PA":
+                    case "UT":
+                    case "VT":
+                    case "WV":
+                    case "MI":
+                    case "CO":
+                    case "RI":
+                    case "TN":
+                    case "WA":
+                    case "CA":
+                    case "AL":
+                    case "LA":
+                    case "MA":
+                    case "DE":
+                    case "HI":
+                    case "VA":
+                    case "NC":
+                    case "SC":
+                    case "FL":
+                    case "CT":
+                    case "NY":
+                    case "NJ":
+                }
+            }break;
         }
-        constructionDetailsComponent.fillBasicConstructionDetails(data);
-        windMitigationComponent.fillBasicWindMitigationDetails(data);
-        protectionComponent.fillOutBasicProtectionDetails(data);
-        Thread.sleep(10000);
-        floodInformationComponent.setPureNFIP(data.get("PureNFIP"));
-        elevationCertificateComponent.fillOutElevationCertificateInformation(data);
     }
 }

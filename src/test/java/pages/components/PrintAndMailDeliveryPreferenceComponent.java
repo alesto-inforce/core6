@@ -25,7 +25,7 @@ public class PrintAndMailDeliveryPreferenceComponent extends CommonComponentsAnd
     @FindBy(xpath = "//div[contains(text(),'Primary Phone Number')]/../../../..//input")
     WebElement membersPhone;
 
-    public void fillPrintAndDeliveryOptions() throws InterruptedException {
+    public void fillPrintAndDeliveryOptions() throws Throwable {
         clickElement(sendThePrintedDocumentsToTheMember);
         Thread.sleep(2000);
         typeText(membersEmail,"email@email.com");

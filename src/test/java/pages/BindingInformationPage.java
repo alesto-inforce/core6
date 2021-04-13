@@ -20,7 +20,7 @@ public class BindingInformationPage extends CommonComponentsAndActions {
         appraisalInformationComponent = new AppraisalInformationComponent(driver);
         PageFactory.initElements(driver,this);
     }
-    public void fillOutBindingInformation(Map<String,String> data){
+    public void fillOutBindingInformation(Map<String,String> data) throws Throwable {
         additionalLocationBindingInformationComponent.fillOutAdditionalLocationBindingInformation(data);
         appraisalInformationComponent.fillOutAppraisalInformation(data);
     }

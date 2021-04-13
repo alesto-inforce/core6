@@ -1,175 +1,225 @@
 [
   {
-    "line": 3,
+    "line": 1,
     "elements": [
       {
-        "start_timestamp": "2021-03-19T19:07:34.644Z",
+        "start_timestamp": "2021-04-13T20:03:08.888Z",
         "before": [
           {
             "result": {
-              "duration": 1796000000,
+              "duration": 35222000000,
               "status": "passed"
             },
             "match": {
-              "location": "tests.steps.underwriting.utilities.QuoteCreation.setup()"
+              "location": "tests.steps.lc360.LC360Steps.iOpenOKTAAndSelectLC360Tile()"
             }
           }
         ],
-        "line": 22,
-        "name": "Quote Creation",
+        "line": 16,
+        "name": "Quote Creation - row \"1\"",
         "description": "",
-        "id": "quote-creation;quote-creation;;2",
-        "after": [
-          {
-            "result": {
-              "duration": 972000000,
-              "status": "passed"
-            },
-            "match": {
-              "location": "tests.steps.underwriting.utilities.QuoteCreation.tearDown()"
-            }
-          }
-        ],
+        "id": "fill-in-lc360-risk-details;quote-creation---row-\"\u003crow\u003e\";;2",
         "type": "scenario",
         "keyword": "Scenario Outline",
         "steps": [
           {
             "result": {
-              "duration": 5917000000,
+              "duration": 2736000000,
+              "status": "passed"
+            },
+            "line": 8,
+            "name": "I navigate to inspections",
+            "match": {
+              "location": "tests.steps.lc360.LC360Steps.iNavigateToInspections()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 229000000,
+              "status": "passed"
+            },
+            "line": 9,
+            "name": "I search for a policy \"HO233748800\"",
+            "match": {
+              "arguments": [
+                {
+                  "val": "\"HO233748800\"",
+                  "offset": 22
+                }
+              ],
+              "location": "tests.steps.lc360.LC360Steps.iSearchForAPolicy(java.lang.String)"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 1908000000,
+              "status": "passed"
+            },
+            "line": 10,
+            "name": "I select the policy \"HO233748800\"",
+            "match": {
+              "arguments": [
+                {
+                  "val": "\"HO233748800\"",
+                  "offset": 20
+                }
+              ],
+              "location": "tests.steps.lc360.LC360Steps.iSelectThePolicy(java.lang.String)"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 31605000000,
+              "status": "passed"
+            },
+            "line": 11,
+            "name": "I assign myself as Risk Manager \"Aleksandar Stojanovic\"",
+            "match": {
+              "arguments": [
+                {
+                  "val": "\"Aleksandar Stojanovic\"",
+                  "offset": 32
+                }
+              ],
+              "location": "tests.steps.lc360.LC360Steps.iAssignMyselfAsRiskManager(java.lang.String)"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 23627000000,
               "status": "passed"
             },
             "line": 12,
-            "name": "I am logged in to Pure as \"Field\"",
+            "name": "I fill in underwriter form \"1\"",
             "match": {
               "arguments": [
                 {
-                  "val": "\"Field\"",
-                  "offset": 26
+                  "val": "\"1\"",
+                  "offset": 27
                 }
               ],
-              "location": "tests.steps.underwriting.utilities.QuoteCreation.iAmLoggedInToPureAs(java.lang.String)"
+              "location": "tests.steps.lc360.LC360Steps.iFillInUnderwriterForm(java.lang.String)"
             },
-            "keyword": "Given "
-          },
+            "keyword": "Then "
+          }
+        ]
+      },
+      {
+        "start_timestamp": "2021-04-13T20:04:44.430Z",
+        "before": [
           {
             "result": {
-              "duration": 1285000000,
+              "duration": 34935000000,
               "status": "passed"
             },
-            "line": 13,
-            "name": "I navigate to Quotes",
             "match": {
-              "location": "tests.steps.underwriting.utilities.QuoteCreation.iNavigateToQuotes()"
-            },
-            "keyword": "When "
-          },
-          {
-            "result": {
-              "duration": 29434000000,
-              "status": "passed"
-            },
-            "line": 14,
-            "name": "I initiate a new quote for a new customer with location in \"FL\" \"12th Street, Miami Beach, FL, USA\" \"Miami Beach\" \"33139\"",
-            "match": {
-              "arguments": [
-                {
-                  "val": "\"FL\"",
-                  "offset": 59
-                },
-                {
-                  "val": "\"12th Street, Miami Beach, FL, USA\"",
-                  "offset": 64
-                },
-                {
-                  "val": "\"Miami Beach\"",
-                  "offset": 100
-                },
-                {
-                  "val": "\"33139\"",
-                  "offset": 114
-                }
-              ],
-              "location": "tests.steps.underwriting.utilities.QuoteCreation.iInitiateANewQuoteForANewCustomerWithLocationIn(java.lang.String,java.lang.String,java.lang.String,java.lang.String)"
-            },
-            "keyword": "And "
-          },
-          {
-            "result": {
-              "duration": 160732000000,
-              "status": "passed"
-            },
-            "line": 15,
-            "name": "I create a quote",
-            "match": {
-              "location": "tests.steps.underwriting.utilities.QuoteCreation.iCreateAQuote()"
-            },
-            "keyword": "And "
-          },
-          {
-            "result": {
-              "duration": 75793000000,
-              "status": "passed"
-            },
-            "line": 16,
-            "name": "I accept underwriting referrals",
-            "match": {
-              "location": "tests.steps.underwriting.utilities.QuoteCreation.iAcceptUnderwritingReferrals()"
-            },
-            "keyword": "And "
-          },
-          {
-            "result": {
-              "duration": 321610000000,
-              "status": "passed"
-            },
-            "line": 17,
-            "name": "I create required forms",
-            "match": {
-              "location": "tests.steps.underwriting.utilities.QuoteCreation.createRequiredForms()"
-            },
-            "keyword": "And "
-          },
-          {
-            "result": {
-              "duration": 174627000000,
-              "status": "passed"
-            },
-            "line": 18,
-            "name": "I request Issue",
-            "match": {
-              "location": "tests.steps.underwriting.utilities.QuoteCreation.iRequestIssue()"
-            },
-            "keyword": "And "
-          },
-          {
-            "result": {
-              "error_message": "java.lang.NullPointerException\r\n\tat pages.PolicyDeliveryPage.fillPrintAndDeliveryOptions(PolicyDeliveryPage.java:28)\r\n\tat tests.steps.underwriting.utilities.QuoteCreation.iBindAQuote(QuoteCreation.java:217)\r\n\tat ✽.I bind a quote(file:///C:/Users/astojanovic/IdeaProjects/core6/src/test/java/feature_files/underwriting/utilities/QuoteCreation.feature:19)\r\n",
-              "duration": 60175000000,
-              "status": "failed"
-            },
-            "line": 19,
-            "name": "I bind a quote",
-            "match": {
-              "location": "tests.steps.underwriting.utilities.QuoteCreation.iBindAQuote()"
-            },
-            "keyword": "And "
+              "location": "tests.steps.lc360.LC360Steps.iOpenOKTAAndSelectLC360Tile()"
+            }
           }
         ],
-        "tags": [
+        "line": 17,
+        "name": "Quote Creation - row \"1\"",
+        "description": "",
+        "id": "fill-in-lc360-risk-details;quote-creation---row-\"\u003crow\u003e\";;3",
+        "type": "scenario",
+        "keyword": "Scenario Outline",
+        "steps": [
           {
-            "name": "@Underwriting"
+            "result": {
+              "duration": 2607000000,
+              "status": "passed"
+            },
+            "line": 8,
+            "name": "I navigate to inspections",
+            "match": {
+              "location": "tests.steps.lc360.LC360Steps.iNavigateToInspections()"
+            },
+            "keyword": "And "
           },
           {
-            "name": "@QuoteCreation"
+            "result": {
+              "duration": 212000000,
+              "status": "passed"
+            },
+            "line": 9,
+            "name": "I search for a policy \"HO233748900\"",
+            "match": {
+              "arguments": [
+                {
+                  "val": "\"HO233748900\"",
+                  "offset": 22
+                }
+              ],
+              "location": "tests.steps.lc360.LC360Steps.iSearchForAPolicy(java.lang.String)"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 1667000000,
+              "status": "passed"
+            },
+            "line": 10,
+            "name": "I select the policy \"HO233748900\"",
+            "match": {
+              "arguments": [
+                {
+                  "val": "\"HO233748900\"",
+                  "offset": 20
+                }
+              ],
+              "location": "tests.steps.lc360.LC360Steps.iSelectThePolicy(java.lang.String)"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 31629000000,
+              "status": "passed"
+            },
+            "line": 11,
+            "name": "I assign myself as Risk Manager \"Aleksandar Stojanovic\"",
+            "match": {
+              "arguments": [
+                {
+                  "val": "\"Aleksandar Stojanovic\"",
+                  "offset": 32
+                }
+              ],
+              "location": "tests.steps.lc360.LC360Steps.iAssignMyselfAsRiskManager(java.lang.String)"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 23519000000,
+              "status": "passed"
+            },
+            "line": 12,
+            "name": "I fill in underwriter form \"1\"",
+            "match": {
+              "arguments": [
+                {
+                  "val": "\"1\"",
+                  "offset": 27
+                }
+              ],
+              "location": "tests.steps.lc360.LC360Steps.iFillInUnderwriterForm(java.lang.String)"
+            },
+            "keyword": "Then "
           }
         ]
       }
     ],
-    "name": "Quote Creation",
+    "name": "Fill in LC360 risk details",
     "description": "",
-    "id": "quote-creation",
+    "id": "fill-in-lc360-risk-details",
     "keyword": "Feature",
-    "uri": "file:src/test/java/feature_files/underwriting/utilities/QuoteCreation.feature",
+    "uri": "file:src/test/java/feature_files/lc360/LC360.feature",
     "tags": []
   }
 ]

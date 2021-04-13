@@ -19,7 +19,7 @@ public class MemberApplicationAndAgreementsComponent extends CommonComponentsAnd
     @FindBy(xpath = "//span[text()='upload']")
     List<WebElement> upload;
 
-    public void upload() {
+    public void upload() throws Throwable {
         clickElement(upload.get(0));
     }
 

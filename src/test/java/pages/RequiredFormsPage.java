@@ -26,10 +26,10 @@ public class RequiredFormsPage extends CommonComponentsAndActions {
     @FindBy(xpath = "//span[text()='generate forms and continue to esign email']")
     WebElement generateDocuments;
 
-    public void generateDocuments(){
+    public void generateDocuments() throws Throwable {
         clickElement(generateDocuments);
     }
-    public void fillSignaturePreferenceAndUpload(Map<String,String> data){
+    public void fillSignaturePreferenceAndUpload(Map<String,String> data) throws Throwable {
         signaturePreferenceComponent.fillSignaturePreferenceNoReminder(data.get("MemberEmail"),data.get("BrokerEmail"));
         memberApplicationAndAgreementsComponent.upload();
     }

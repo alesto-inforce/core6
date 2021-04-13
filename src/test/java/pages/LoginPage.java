@@ -25,40 +25,9 @@ public class LoginPage extends CommonComponentsAndActions {
     @FindBy(xpath = "//span[text()='>>> login']")
     WebElement loginButton;
 
-    public void openApplication(String env){
-        switch (env){
-            case "QA"   : {
-                driver.get("https://privqa.purehnw.com/");
-            }
-            break;
-            case "STG"  : {
-                driver.get("https://corestaging.purehnw.com/");
-            }
-            break;
-            case "PROD" : {
-                driver.get("https://www.purehnw.com/");
-            }
-            break;
-        }
-    }
 
-    public void setBrokerNumber(String value) {
-        typeText(brokerNumberInput,value);
-    }
-
-    public void setUsername(String value) {
-        typeText(usernameInput,value);
-    }
-
-    public void setPassword(String value) {
-        typeText(passwordInput,value);
-    }
-
-    public void clickLoginButton(){
-        clickElement(loginButton);
-    }
-
-    public void login(String env,String subrole) {
+    public void login(String env,String subrole) throws Throwable {
+        openApplication(env);
         String username;
         String password;
         String brokerNumber = "0";
@@ -77,6 +46,7 @@ public class LoginPage extends CommonComponentsAndActions {
             case "UWSA2" :             { username = "automationuw12"; password = "automationuw12"; } break;
             case "UWSSA" :             { username = "automationuw13"; password = "automationuw13"; } break;
             case "UWSRM" :             { username = "automationuw14"; password = "automationuw14"; } break;
+            case "A0" :                { username = "automation0"; password = "automation0"; } break;
             default:
                 throw new IllegalStateException("Unexpected value: " + subrole);
         }
@@ -106,6 +76,36 @@ public class LoginPage extends CommonComponentsAndActions {
             }
             break;
         }
+    }
+
+    public void openApplication(String env){
+        switch (env){
+            case "QA"   : {
+                driver.get("https://privqa.purehnw.com/");
+            }
+            break;
+            case "STG"  : {
+                driver.get("https://corestaging.purehnw.com/");
+            }
+            break;
+            case "PROD" : {
+                driver.get("https://www.purehnw.com/");
+            }
+            break;
+        }
+    }
+
+    public void clickLoginButton() throws Throwable {
+        clickElement(loginButton);
+    }
+    public void setBrokerNumber(String value) throws Throwable {
+        typeText(brokerNumberInput,value);
+    }
+    public void setUsername(String value) throws Throwable {
+        typeText(usernameInput,value);
+    }
+    public void setPassword(String value) throws Throwable {
+        typeText(passwordInput,value);
     }
 
 }

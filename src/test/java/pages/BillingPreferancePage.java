@@ -18,7 +18,7 @@ public class BillingPreferancePage extends CommonComponentsAndActions {
         PageFactory.initElements(driver,this);
     }
 
-    public void sendBillToMember(){
+    public void sendBillToMember() throws Throwable {
         billDeliveryOptionsComponent.sendBillToMember();
     }
 

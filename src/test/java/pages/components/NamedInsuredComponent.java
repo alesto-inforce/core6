@@ -22,10 +22,10 @@ public class NamedInsuredComponent extends CommonComponentsAndActions{
     @FindBy(xpath = "//div[text()='named insured']/../../../../../../div[2]//span[text()='delete']")
     List<WebElement> deleteAddresses;
 
-    public void deleteAddresses(int index){
+    public void deleteAddresses(int index) throws Throwable {
         clickElement(deleteAddresses.get(index));
     }
-    public void addAddresses(){
+    public void addAddresses() throws Throwable {
         clickElement(addAddresses);
     }
 

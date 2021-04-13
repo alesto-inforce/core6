@@ -22,14 +22,14 @@ public class UnderwritingReferralsPage extends CommonComponentsAndActions {
     @FindBy(xpath = "//span[text()='OK']")
     WebElement popUpOK;
 
-    public void acceptReferrals(String note) throws InterruptedException {
+    public void acceptReferrals(String note) throws Throwable {
         referralsComponent.fillUnderwriterNotes(note);
         referralsComponent.setAllOverriddenYes();
     }
-    public void acceptUnacceptedReferrals(String note) throws InterruptedException {
+    public void acceptUnacceptedReferrals(String note) throws Throwable {
         referralsComponent.acceptUnacceptedReferral(note);
     }
-    public void acceptReferralsPopUp(){
+    public void acceptReferralsPopUp() throws Throwable {
         clickElement(popUpOK);
     }
 }

@@ -36,31 +36,31 @@ public class SignaturePreferenceComponent extends CommonComponentsAndActions{
     WebElement doYouWantToSendAReminderNo;
 
 
-    public void electronicallySignDocumentsNo(){
+    public void electronicallySignDocumentsNo() throws Throwable {
         clickElement(electronicallySignDocumentsNo);
     }
-    public void electronicallySignDocumentsYes(){
+    public void electronicallySignDocumentsYes() throws Throwable {
         clickElement(electronicallySignDocumentsYes);
     }
-    public void sendElectSignatureToMember(){
+    public void sendElectSignatureToMember() throws Throwable {
         clickElement(whoShouldWeSendElectSignatureToEmailToMember);
     }
-    public void sendElectSignatureToBroker(){
+    public void sendElectSignatureToBroker() throws Throwable {
         clickElement(whoShouldWeSendElectSignatureToEmailToBroker);
 }
-    public void enterMemberEmailAddressField (String memberEmailAddressField){
+    public void enterMemberEmailAddressField (String memberEmailAddressField) throws Throwable {
         typeText(memberEmailForElectronicSignature,memberEmailAddressField);
     }
-    public void enterBrokerEmailAddressField (String brokerEmailAddressField){
+    public void enterBrokerEmailAddressField (String brokerEmailAddressField) throws Throwable {
         typeText(brokerEmailForElectronicSignature,brokerEmailAddressField);
 }
-    public void sendAReminderNo(){
+    public void sendAReminderNo() throws Throwable {
         clickElement(doYouWantToSendAReminderNo);
     }
-    public void sendAReminderYes(){
+    public void sendAReminderYes() throws Throwable {
         clickElement(doYouWantToSendAReminderYes);
 }
-    public void fillSignaturePreferenceNoReminder(String memberEmail, String brokerEmail){
+    public void fillSignaturePreferenceNoReminder(String memberEmail, String brokerEmail) throws Throwable {
         enterMemberEmailAddressField(memberEmail);
         enterBrokerEmailAddressField(brokerEmail);
         sendAReminderNo();

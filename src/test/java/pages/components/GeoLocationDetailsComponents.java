@@ -16,19 +16,20 @@ public class GeoLocationDetailsComponents extends CommonComponentsAndActions {
     @FindBy(xpath = "//div[text()='Standardized Address']/../../../../div//input")
     WebElement standardizedAddress;
 
+
     @FindBy(xpath = "//div[text()='Geocoded location']/../../../../div//input")
     WebElement geocodedLocation;
 
     @FindBy(xpath = "//div[text()='Use User Entered Address for Geocoding']/../../../../div//input")
     WebElement useUserEnteredAddressForGeocoding;
 
-    public void standardizedAddress(String value){
+    public void standardizedAddress(String value) throws Throwable {
         typeText(standardizedAddress,value);
     }
-    public void geocodedLocation(String value){
+    public void geocodedLocation(String value) throws Throwable {
         typeText(geocodedLocation,value);
     }
-    public void useUserEnteredAddressForGeocoding(){
+    public void useUserEnteredAddressForGeocoding() throws Throwable {
         clickElement(useUserEnteredAddressForGeocoding);
     }
 }

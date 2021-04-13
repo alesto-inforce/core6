@@ -16,7 +16,7 @@ public class PreviousClaimLossesPage extends CommonComponentsAndActions {
         PageFactory.initElements(driver,this);
     }
 
-    public void noPriorLossesInPastFiveYears(){
+    public void noPriorLossesInPastFiveYears() throws Throwable {
         lossClaimHistoryComponent.setPriorLossesNo();
     }
 }

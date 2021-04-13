@@ -19,7 +19,7 @@ public class BillDeliveryOptionsComponent extends CommonComponentsAndActions {
     @FindBy(xpath = "//label[contains(text(),'Send Bill to Member')]/..//input")
     WebElement sendBillToMember;
 
-    public void sendBillToMember(){
+    public void sendBillToMember() throws Throwable {
         clickElement(sendBillToMember);
     }
 

@@ -33,7 +33,7 @@ public class ElevationCertificateComponent extends CommonComponentsAndActions {
     @FindBy(xpath = "//table//td[contains(text(),'h) Total area of all permanent openings (flood vents) in square inches?')]/../../../../../../../../../../../../../../../../td[2]//input")
     WebElement totalAreaOfPermanentOpenings;
 
-    public void fillOutElevationCertificateInformation(Map<String,String> data) throws InterruptedException {
+    public void fillOutElevationCertificateInformation(Map<String,String> data) throws Throwable {
         setBuildingDiagramNumber(data.get("DiagramNumberValue"));
         Thread.sleep(6000);
         setTopOfBottomFloor(data.get("TopOfBottomFloorValue"));
@@ -53,28 +53,28 @@ public class ElevationCertificateComponent extends CommonComponentsAndActions {
         Thread.sleep(10000);
     }
 
-    public void setBuildingDiagramNumber(String diagram) {
+    public void setBuildingDiagramNumber(String diagram) throws Throwable {
         typeText(buildingDiagramNumber,diagram);
     }
-    public void setTopOfBottomFloor(String value) {
+    public void setTopOfBottomFloor(String value) throws Throwable {
         typeText(topOfBottomFloor,value);
     }
-    public void setTopOfNextFloor(String value) {
+    public void setTopOfNextFloor(String value) throws Throwable {
         typeText(topOfNextFloor,value);
     }
-    public void setBottomOfTheAttachedGarage(String value) {
+    public void setBottomOfTheAttachedGarage(String value) throws Throwable {
         typeText(bottomOfTheAttachedGarage,value);
     }
-    public void setLowestElevation(String value) {
+    public void setLowestElevation(String value) throws Throwable {
         typeText(lowestElevation,value);
     }
-    public void setTotalSquareFeetOfAttachedGarage(String value) {
+    public void setTotalSquareFeetOfAttachedGarage(String value) throws Throwable {
         typeText(totalSquareFeetOfAttachedGarage,value);
     }
-    public void setPermanentFloodOpenings(String value) {
+    public void setPermanentFloodOpenings(String value) throws Throwable {
         typeText(permanentFloodOpenings,value);
     }
-    public void setTotalAreaOfPermanentOpenings(String value) {
+    public void setTotalAreaOfPermanentOpenings(String value) throws Throwable {
         typeText(totalAreaOfPermanentOpenings,value);
     }
 }

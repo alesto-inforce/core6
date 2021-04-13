@@ -70,140 +70,171 @@ public class QuoteBasicInformationPage extends CommonComponentsAndActions {
     List<WebElement> state;
     @FindBy(xpath = "//div[contains(text(),'Spouse/Partner')]/../../../..//input")
     WebElement spousePartner;
+    @FindBy(xpath = "//div[text()='Is the client a member of a PURE Marketing Group?']/../../../../div//input")
+    List<WebElement> memberOfPUREMarketingGroup;
 
     // Quote Basic Information
-    public void initiateQuote(Map<String,String> data) throws InterruptedException {
-        switch (data.get("ENV")){
+    public void initiateQuote(Map<String,String> data,String ENV) throws Throwable {
+        //Set Licensed Producer and Advisor Servicer based on the ENV
+        switch (ENV){
             case "QA": {
-                data.put("LicensedProducer",data.get("LicensedProducerQA"));
-                data.put("AdvisorServicer",data.get("AdvisorServicerQA"));
+                data.replace("Licensed_Producer","Jerry Ford");
+                data.replace("Advisor_Servicer","Jerry Ford");
             } break;
             case "STG":{
-                data.put("LicensedProducer",data.get("LicensedProducerSTG"));
-                data.put("AdvisorServicer",data.get("AdvisorServicerSTG"));
+                if(data.get("State").equals("NY")){
+                    data.replace("Licensed_Producer", "Edison Judson");
+                    data.replace("Advisor_Servicer", "Edison Judson");
+                }else {
+                    data.replace("Licensed_Producer", "Rodrigo Lucero");
+                    data.replace("Advisor_Servicer", "Rodrigo Lucero");
+                }
             } break;
             case "PROD":{
-                data.put("LicensedProducer",data.get("LicensedProducerPROD"));
-                data.put("AdvisorServicer",data.get("AdvisorServicerPROD"));
+                data.replace("Licensed_Producer","");
+                data.replace("Advisor_Servicer","");
             } break;
         }
-        setEffectiveDate(data.get("EffectiveDate"));
-        Thread.sleep(2000);
-        setRiskState(data.get("RiskState"));
-        Thread.sleep(2000);
-        setDateOfBirth(data.get("DateOfBirth"));
-        Thread.sleep(2000);
-        livedAtAddressMoreThanSixMonths(data.get("MoreThanSixMonths"));
-        entertainerAthletePoliticalFigure(data.get("EntertainerAthlete"));
-        setIsDisclosureRequiredAndHasBeenMade(data.get("DisclosureRequired"),data.get("DisclosureMade"));
-        selectAdmittedOrSurplus(data.get("Admitted"));
-        selectAdmittedLine(data.get("AdmittedLine"));
-        setExWind(data.get("ExWind"));
-        selectLicensedProducer(data.get("LicensedProducer"));
-        Thread.sleep(2000);
-        selectAdvisorServicer(data.get("AdvisorServicer"));
-        Thread.sleep(2000);
-        setFirstName(data.get("FirstName"));
-        setLastName(data.get("LastName"));
-        setMemberOccupation(data.get("MemberOccupation"));
-        setMemberEmployer(data.get("MemberEmployer"));
-        setPrimaryRiskAddressLine1(data.get("PrimaryAddressLine"));
-        setCity(data.get("City"));
-        setZipCode(data.get("ZIPCode"));
-        setState(data.get("State"));
-        Thread.sleep(2000);
-        setSpousePartner(data.get("SpousePartner"));
-        if(data.get("SpousePartner").equalsIgnoreCase("Yes")){
-            setPartnerFirstName(data.get("PartnerFirstName"));
-            setPartnerLastName(data.get("PartnerLastName"));
+
+        //Fill in initiate quote details
+        setEffectiveDate(data.get("Effective_Date"));pause(3000);
+        setDateOfBirth(data.get("Date_Of_Birth"));pause(3000);
+        setRiskState(data.get("State"));pause(3000);
+
+        switch (data.get("State")){
+            //Only Admitted No Ex Wind States
+            case "AK": case "AR": case "AZ": case "CO": case "DC": case "DE": case "HI": case "IA": case "IL": case "IN":
+            case "KS": case "KY": case "MI": case "ME": case "MN": case "MO": case "MT": case "ND": case "NE": case "NH":
+            case "NM": case "NV": case "MD": case "OH": case "OK": case "OR": case "PA": case "RI": case "SD": case "TN":
+            case "UT": case "VA": case "VT": case "WA": case "WI": case "WV": case "WY":{
+                selectAdmittedLine(data.get("Admitted_Line"));
+            }break;
+
+            //Admitted and Surplus No Ex Wind States
+            case "AL": case "CA": case "CT": case "LA": case "MA": case "MS": case "NC": case "NJ": case "SC":{
+                selectAdmittedOrSurplus(data.get("Admitted_Or_Surplus"));pause(3000);
+                selectAdmittedLine(data.get("Admitted_Line"));
+            }break;
+
+            //Admitted and Surplus and Ex Wind States
+            case "FL": case "TX":{
+                selectAdmittedOrSurplus(data.get("Admitted_Or_Surplus"));pause(3000);
+                selectAdmittedLine(data.get("Admitted_Line"));pause(3000);
+                setExWind(data.get("Ex_Wind"));
+            }break;
+
+            //Admitted and Surplus No Ex Wind With Marketing Group States
+            case "NY":{
+                selectAdmittedOrSurplus(data.get("Admitted_Or_Surplus"));pause(3000);
+                selectAdmittedLine(data.get("Admitted_Line"));
+                setMemberOfPureMarketingGroup(data.get("Member_Of_Pure_Marketing_Group"));
+            }break;
+
+            //Admitted and Surplus-cant be selected No Ex Wind With Marketing Group States
+            case "GA":{
+                selectAdmittedLine(data.get("Admitted_Line"));
+                //setMemberOfPureMarketingGroup(data.get("Member_Of_Pure_Marketing_Group")); TODO
+            }break;
         }
+
+        pause(3000);
+        livedAtAddressMoreThanSixMonths(data.get("More_Than_Six_Months"));
+        entertainerAthletePoliticalFigure(data.get("Entertainer_Athlete"));
+        setIsDisclosureRequiredAndHasBeenMade(data.get("Disclosure_Required"),data.get("Disclosure_Made"));
+        selectLicensedProducer(data.get("Licensed_Producer"));
+        pause(3000);
+        selectAdvisorServicer(data.get("Advisor_Servicer"));
+        pause(3000);
+        setFirstName(data.get("First_Name"));
+        setLastName(data.get("Last_Name"));
+        setMemberOccupation(data.get("Member_Occupation"));
+        setMemberEmployer(data.get("Member_Employer"));
+        setPrimaryRiskAddressLine1(data.get("Address_Line_1_Txt"));
+        setCity(data.get("City_Name_Txt"));
+        setZipCode(data.get("Zip_Code"));
+        setState(data.get("State"));
+        pause(3000);
+        setSpousePartner(data.get("Spouse_Partner"));
+        if(data.get("Spouse_Partner").equalsIgnoreCase("Yes")){
+            setPartnerFirstName(data.get("Partner_First_Name"));
+            setPartnerLastName(data.get("Partner_Last_Name"));
+        }
+        clickElement(CommonComponentsAndActions.next);
     }
     // Types in the Effective Date
-    public void setEffectiveDate(String effectiveDateValue) {
+    public void setEffectiveDate(String effectiveDateValue) throws Throwable {
         typeText(effectiveDate,effectiveDateValue);
     }
     // Types in the date Of Birth
-    public void setDateOfBirth(String dateOfBirthValue) {
+    public void setDateOfBirth(String dateOfBirthValue) throws Throwable {
         typeText(dateOfBirth,dateOfBirthValue);
     }
     // Types in the First Name
-    public void setFirstName(String firstNameValue) {
+    public void setFirstName(String firstNameValue) throws Throwable {
         typeText(firstName.get(0),firstNameValue);
     }
     // Types in the Last Name
-    public void setLastName(String lastNameValue) {
+    public void setLastName(String lastNameValue) throws Throwable {
         typeText(lastName.get(0),lastNameValue);
     }
     // Types in Member Employer
-    public void setMemberEmployer(String memberEmployerValue) {
+    public void setMemberEmployer(String memberEmployerValue) throws Throwable {
         typeText(memberEmployer,memberEmployerValue);
     }
     // Types in Member Occupation
-    public void setMemberOccupation(String memberOccupationValue) {
+    public void setMemberOccupation(String memberOccupationValue) throws Throwable {
         typeText(memberOccupation,memberOccupationValue);
     }
     // Sets Risk State
-    public void setRiskState(String riskStateValue) {
+    public void setRiskState(String riskStateValue) throws Throwable {
         typeText(riskState,riskStateValue);
     }
     // Sets State
-    public void setState(String stateValue) {
+    public void setState(String stateValue) throws Throwable {
         typeText(state.get(0),stateValue);
     }
     // Selects - Admitted or Surplus Lines:
-    public void selectAdmittedOrSurplus(String admittedOrSurplusValue) {
+    public void selectAdmittedOrSurplus(String admittedOrSurplusValue) throws Throwable {
         typeText(admittedOrSurplus,admittedOrSurplusValue);
     }
     // Checks - Which admitted lines would you like to quote?
-    public void selectAdmittedLine(String admittedLineValue) {
+    public void selectAdmittedLine(String admittedLineValue) throws Throwable {
         clickElement(driver.findElement(By.xpath("//label[text()='"+admittedLineValue+"']/../span/input")));
     }
     // Checks Yes or No Ex-wind Homeowner
-    public void setExWind(String exWind) {
-        if (exWind.equalsIgnoreCase("Yes")) {
-            clickElement(exWindYes);
-        } else {
-            clickElement(exWindNo);
-        }
+    public void setExWind(String exWind) throws Throwable {
+        choose(exWindYes,exWindNo,exWind);
     }
     // Types in Spouse/Partner/Other First Name
-    public void setPartnerFirstName(String partnerFirstNameValue) {
+    public void setPartnerFirstName(String partnerFirstNameValue) throws Throwable {
         typeText(firstName.get(1),partnerFirstNameValue);
     }
     // Types in Spouse/Partner/Other Last Name
-    public void setPartnerLastName(String partnerLastNameValue) {
+    public void setPartnerLastName(String partnerLastNameValue) throws Throwable {
         typeText(lastName.get(1),partnerLastNameValue);
     }
     // Types in Primary Risk Address Line 1
-    public void setPrimaryRiskAddressLine1(String riskAddressLine1Value) {
+    public void setPrimaryRiskAddressLine1(String riskAddressLine1Value) throws Throwable {
         typeText(primaryAddressLine1,riskAddressLine1Value);
     }
     // Types in the City
-    public void setCity(String cityValue) {
+    public void setCity(String cityValue) throws Throwable {
         typeText(city.get(0),cityValue);
     }
     // Types in the Zip Code
-    public void setZipCode(String zipCodeValue) {
+    public void setZipCode(String zipCodeValue) throws Throwable {
         typeText(zipCode.get(0),zipCodeValue);
     }
     // Checks Yes or No - Has the client lived at this address for more than six months?
-    public void livedAtAddressMoreThanSixMonths(String moreThanSixMonths) {
-        if (moreThanSixMonths.equalsIgnoreCase("Yes")) {
-            clickElement(sixMonthsYes);
-        } else {
-            clickElement(sixMonthsNo);
-        }
+    public void livedAtAddressMoreThanSixMonths(String moreThanSixMonths) throws Throwable {
+        choose(sixMonthsYes,sixMonthsNo,moreThanSixMonths);
     }
     // Checks Yes or No - Are you or is a member of your household a Media Personality Professional Entertainer or Athlete or an Appointed or Elected Federal or State political figure?
-    public void entertainerAthletePoliticalFigure(String athletePolitical) {
-        if (athletePolitical.equalsIgnoreCase("Yes")) {
-            clickElement(memberOfHouseholdYes);
-        } else {
-            clickElement(memberOfHouseholdNo);
-        }
+    public void entertainerAthletePoliticalFigure(String athletePolitical) throws Throwable {
+        choose(memberOfHouseholdYes,memberOfHouseholdNo,athletePolitical);
     }
     // Set is disclosure required
-    public void setIsDisclosureRequiredAndHasBeenMade(String isDisclosureRequired, String hasDisclosureBeenMade) {
+    public void setIsDisclosureRequiredAndHasBeenMade(String isDisclosureRequired, String hasDisclosureBeenMade) throws Throwable {
         if (isDisclosureRequired.equalsIgnoreCase("Yes")) {
             clickElement(disclosureRequiredYes);
         } else if (hasDisclosureBeenMade.equalsIgnoreCase("Yes")) {
@@ -215,15 +246,19 @@ public class QuoteBasicInformationPage extends CommonComponentsAndActions {
         }
     }
     // Set Licensed Producer
-    public void selectLicensedProducer(String licensedProducerValue) {
+    public void selectLicensedProducer(String licensedProducerValue) throws Throwable {
         typeText(licensedProducer,licensedProducerValue);
     }
     // Set Advisor / Servicer
-    public void selectAdvisorServicer(String advisorServicerValue) {
+    public void selectAdvisorServicer(String advisorServicerValue) throws Throwable {
         typeText(advisorServicer,advisorServicerValue);
     }
     // Set Spouse / Partner yes or no
-    public void setSpousePartner(String spousePartnerValue) {
+    public void setSpousePartner(String spousePartnerValue) throws Throwable {
         typeText(spousePartner,spousePartnerValue);
+    }
+    // Set member of pure marketing group
+    public void setMemberOfPureMarketingGroup(String member) throws Throwable {
+        typeText(memberOfPUREMarketingGroup.get(1),member);
     }
 }

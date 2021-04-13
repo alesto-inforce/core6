@@ -22,12 +22,10 @@ public class LiabilityCoveragesComponent extends CommonComponentsAndActions{
     @FindBy(xpath = "//div[text()='Medical Payments Limit']/../../../..//input")
     WebElement liabilityCoverageLimit2;
 
-
-
-    public void selectLiabilityCoveragesLimit(Map<String,String> data) {
-        typeText(liabilityCoverageLimit,data.get("LiabilityCoverageValue"));
+    public void selectLiabilityCoveragesLimit(Map<String,String> data) throws Throwable {
+        typeText(liabilityCoverageLimit,formatNum(data.get("Personal_Liability_Limit")));
     }
-    public void medicalPaymentLimit(String value){
+    public void medicalPaymentLimit(String value) throws Throwable {
         typeText(liabilityCoverageLimit2,value);
     }
 
